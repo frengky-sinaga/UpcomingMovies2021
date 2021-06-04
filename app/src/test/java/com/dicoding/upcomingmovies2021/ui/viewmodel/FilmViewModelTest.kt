@@ -48,9 +48,15 @@ class FilmViewModelTest {
     }
 
     @Test
-    fun getDataDummy() {
-        val filmEntities = viewModel.getDataDummy(1)
-        assertNotNull(filmEntities)
-        assertEquals(2, filmEntities.size)
+    fun `getDataDummy return with expected data`() {
+        val movies = viewModel.getDataDummy(1)
+        assertNotNull(movies)
+        assertEquals(2, movies.size)
+        assertEquals(movies[0].typeFilm, TypeFilm.Movie)
+
+        val tvShow = viewModel.getDataDummy(2)
+        assertNotNull(tvShow)
+        assertEquals(1, tvShow.size)
+        assertEquals(tvShow[0].typeFilm, TypeFilm.TvShow)
     }
 }
