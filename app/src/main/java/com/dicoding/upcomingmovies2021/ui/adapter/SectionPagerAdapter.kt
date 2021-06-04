@@ -10,10 +10,6 @@ class SectionPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     }
 
     override fun createFragment(position: Int): Fragment {
-        var fragment: Fragment? = null
-        when (position) {
-            0, 1 -> fragment = FilmFragment()
-        }
-        return fragment as Fragment
+        return FilmFragment.newInstance(position + 1)
     }
 }

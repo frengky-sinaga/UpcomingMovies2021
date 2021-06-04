@@ -1,5 +1,6 @@
 package com.dicoding.upcomingmovies2021.ui.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,9 +9,16 @@ import coil.transform.RoundedCornersTransformation
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
 import com.dicoding.upcomingmovies2021.databinding.ItemsFilmBinding
+import com.dicoding.upcomingmovies2021.ui.fragments.DetailFragment
 
 class RvAdapter : RecyclerView.Adapter<RvAdapter.ViewHolder>() {
     private var listDetailFilms = ArrayList<DetailFilmEntity>()
+
+    private var onItemClickCallback: OnItemClickCallback? = null
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     fun setDetail(detailFilm: List<DetailFilmEntity>?) {
         if (detailFilm == null) return
@@ -29,7 +37,7 @@ class RvAdapter : RecyclerView.Adapter<RvAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = listDetailFilms.size
 
-    class ViewHolder(private val binding: ItemsFilmBinding) :
+    inner class ViewHolder(private val binding: ItemsFilmBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(detailFilm: DetailFilmEntity) {
             with(binding) {
@@ -41,7 +49,13 @@ class RvAdapter : RecyclerView.Adapter<RvAdapter.ViewHolder>() {
                 }
                 tvItemTitle.text = detailFilm.title
                 tvItemDate.text = detailFilm.releaseDate
+
+                itemView.setOnClickListener { onItemClickCallback?.onItemClicked(detailFilm) }
             }
         }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: DetailFilmEntity)
     }
 }
