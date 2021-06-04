@@ -13,14 +13,8 @@ class FilmViewModel : ViewModel() {
         dataFilm.value = data
     }
 
-    fun getDataFilm(): LiveData<DetailFilmEntity> {
-        return dataFilm
-    }
+    fun getDataFilm(): LiveData<DetailFilmEntity> = dataFilm
 
-    fun getDataDummy(index: Int): List<DetailFilmEntity> {
-        return when (index) {
-            1 -> DataDummy.generateDummyMovie()
-            else -> DataDummy.generateDummyTvShow()
-        }
-    }
+    fun getDataDummy(index: Int): List<DetailFilmEntity> =
+        if (index == 1) DataDummy.generateDummyMovie() else DataDummy.generateDummyTvShow()
 }
