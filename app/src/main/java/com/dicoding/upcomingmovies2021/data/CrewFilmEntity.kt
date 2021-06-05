@@ -1,7 +1,8 @@
 package com.dicoding.upcomingmovies2021.data
 
 data class CrewFilmEntity(
-    var director: String?,
+    var creators: List<String>?,
+    var directors: List<String>?,
     var writers: List<String>?,
-    var stars: List<String>,
+    var stars: List<String>?,
 )

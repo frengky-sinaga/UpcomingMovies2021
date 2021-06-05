@@ -29,7 +29,7 @@ class FilmViewModelTest {
             poster = "link poster",
             genre = listOf(Genre.Action),
             crews = CrewFilmEntity(
-                director = null,
+                directors = null,
                 writers = null,
                 stars = listOf("apple")
             ),
@@ -43,7 +43,7 @@ class FilmViewModelTest {
         val value = viewModel.getDataFilm().getOrAwaitValue()
         assertNotNull(value)
         assertEquals(value.title, detailFilm.title)
-        assertEquals(value.crews.director, detailFilm.crews.director)
+        assertEquals(value.crews.directors, detailFilm.crews.directors)
         assertEquals(value.description, detailFilm.description)
     }
 
