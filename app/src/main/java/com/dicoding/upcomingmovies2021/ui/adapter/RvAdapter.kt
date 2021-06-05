@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.size.Scale
 import coil.transform.RoundedCornersTransformation
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
@@ -42,6 +43,7 @@ class RvAdapter : RecyclerView.Adapter<RvAdapter.ViewHolder>() {
         fun bind(detailFilm: DetailFilmEntity) {
             with(binding) {
                 imgPoster.load(detailFilm.poster) {
+                    scale(Scale.FIT)
                     placeholder(R.drawable.ic_placeholder)
                     crossfade(true)
                     crossfade(500)
