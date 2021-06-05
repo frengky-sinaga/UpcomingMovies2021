@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
@@ -46,7 +47,7 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
         filmAdapter.setDetail(filmList)
 
         with(binding.rvMovie) {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)
             adapter = filmAdapter
 

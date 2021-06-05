@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.databinding.FragmentDetailBinding
 import com.dicoding.upcomingmovies2021.ui.viewmodel.FilmViewModel
@@ -21,8 +22,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         viewModel.getDataFilm().observe(viewLifecycleOwner, { data ->
             binding.tvTitle.text = data.title
-            binding.tvDescription.text = data.description
-            binding.imgPoster.load(data.poster)
+            binding.tvReleaseDate.text = data.releaseDate
+            binding.imgPoster.load(data.poster){
+            }
+            binding.imgIcon.load(data.poster){
+                transformations(CircleCropTransformation())
+            }
         })
     }
 }
