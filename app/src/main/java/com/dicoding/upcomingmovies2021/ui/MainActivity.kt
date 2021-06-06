@@ -31,4 +31,13 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
     }
+
+    /***
+     * Not implemented yet
+     * TODO:
+     * 1. Adding settings
+     * 2. Adding bookmarks
+     * 3. Adding light dark theme
+     * 4. Adding genre filter
+     */
 }

@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
 import com.dicoding.upcomingmovies2021.databinding.FragmentFilmBinding
@@ -16,6 +15,7 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
 
     companion object {
         private const val ARG_SECTION_NUMBER = "section_number"
+
         @JvmStatic
         fun newInstance(index: Int) =
             FilmFragment().apply {
@@ -51,7 +51,7 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
             setHasFixedSize(true)
             adapter = filmAdapter
 
-            filmAdapter.setOnItemClickCallback(object : RvAdapter.OnItemClickCallback{
+            filmAdapter.setOnItemClickCallback(object : RvAdapter.OnItemClickCallback {
                 override fun onItemClicked(data: DetailFilmEntity) {
                     viewModel.setDataFilm(data)
 
@@ -59,7 +59,11 @@ class FilmFragment : Fragment(R.layout.fragment_film) {
                     val detailFragment = DetailFragment()
 
                     fm?.beginTransaction()?.apply {
-                        replace(R.id.main_container, detailFragment, DetailFragment::class.java.simpleName)
+                        replace(
+                            R.id.main_container,
+                            detailFragment,
+                            DetailFragment::class.java.simpleName
+                        )
                         addToBackStack(null)
                         commit()
                     }

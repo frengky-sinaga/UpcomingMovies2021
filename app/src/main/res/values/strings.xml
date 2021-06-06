@@ -7,4 +7,10 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="date">Release Date</string>
+    <string name="directors">Directors</string>
+    <string name="stars">Stars</string>
+    <string name="writers">Writers</string>
+    <string name="genre">Genre</string>
+    <string name="creators">Creators</string>
+    <string name="content_description">Content Description</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.dicoding.upcomingmovies2021.ui.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +9,6 @@ import coil.transform.RoundedCornersTransformation
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
 import com.dicoding.upcomingmovies2021.databinding.ItemsFilmBinding
-import com.dicoding.upcomingmovies2021.ui.fragments.DetailFragment
 
 class RvAdapter : RecyclerView.Adapter<RvAdapter.ViewHolder>() {
     private var listDetailFilms = ArrayList<DetailFilmEntity>()
