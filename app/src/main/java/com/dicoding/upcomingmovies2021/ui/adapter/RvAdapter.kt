@@ -16,7 +16,7 @@ class RvAdapter(private val onItemClickCallback: OnItemClickCallback) :
     private var listDetailFilms = ArrayList<DetailFilmEntity>()
 
     fun setDetail(detailFilm: List<DetailFilmEntity>?) {
-        if (detailFilm == null) return
+        if (detailFilm.isNullOrEmpty()) return
         this.listDetailFilms.clear()
         this.listDetailFilms.addAll(detailFilm)
     }

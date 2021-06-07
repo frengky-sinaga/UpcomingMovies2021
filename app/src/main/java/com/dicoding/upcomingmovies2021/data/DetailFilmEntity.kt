@@ -4,13 +4,13 @@ import com.dicoding.upcomingmovies2021.utils.Genre
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 
 data class DetailFilmEntity(
-    var idFilm: String,
-    var title: String,
-    var poster: String,
-    var genre: List<Genre>,
-    var releaseDate: String,
-    var crews: CrewFilmEntity,
-    var description: String,
-    var link: String,
-    var typeFilm: TypeFilm,
+    val idFilm: String,
+    val title: String,
+    val poster: String,
+    val genre: List<Genre>,
+    val releaseDate: String,
+    val crews: CrewFilmEntity,
+    val description: String,
+    val link: String,
+    val typeFilm: TypeFilm,
 )

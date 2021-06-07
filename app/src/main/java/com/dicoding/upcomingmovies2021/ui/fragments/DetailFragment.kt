@@ -70,21 +70,21 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         if (result.crews.directors != null) {
             binding.tvDirectors.visibility = visible
             binding.chipDirectors.visibility = visible
-            for (director in result.crews.directors!!) {
+            result.crews.directors?.forEach { director ->
                 createChip(director, EnumChip.Director)
             }
         }
         if (result.crews.writers != null) {
             binding.chipWriters.visibility = visible
             binding.tvWriters.visibility = visible
-            for (writer in result.crews.writers!!) {
+            result.crews.writers?.forEach { writer ->
                 createChip(writer, EnumChip.Writer)
             }
         }
         if (result.crews.creators != null) {
             binding.chipCreators.visibility = visible
             binding.tvCreators.visibility = visible
-            for (creator in result.crews.creators!!) {
+            result.crews.creators?.forEach { creator ->
                 createChip(creator, EnumChip.Creator)
             }
         }
