@@ -23,7 +23,7 @@ class FilmViewModelTest {
     }
 
     @Test
-    fun `getDataFilm return with the data that sent by others`() {
+    fun getDataFilm() {
         val detailFilm = DetailFilmEntity(
             title = "test",
             poster = "link poster",
@@ -49,7 +49,7 @@ class FilmViewModelTest {
     }
 
     @Test
-    fun `getDataDummy return with expected data`() {
+    fun getDataDummy() {
         val movies = viewModel.getDataDummy(1)
         assertNotNull(movies)
         assertEquals(20, movies.size)

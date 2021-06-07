@@ -11,6 +11,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt8404256",
                 title = "Snake Eyes: G.I. Joe Origins",
                 poster = "https://upload.wikimedia.org/wikipedia/en/3/38/Snake_Eyes_-_G.I._Joe_Origins%2C_official_poster.png",
                 genre = listOf(
@@ -33,6 +34,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt2382320",
                 title = "No Time to Die",
                 poster = "https://upload.wikimedia.org/wikipedia/en/f/fe/No_Time_to_Die_poster.jpg",
                 genre = listOf(
@@ -57,6 +59,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt8385148",
                 title = "The Hitman's Wife's Bodyguard",
                 poster = "https://upload.wikimedia.org/wikipedia/en/a/ab/Hitman%27s_Wife%27s_Bodyguard_%282021_film%29_theatrical_release_poster.jpg",
                 genre = listOf(
@@ -80,6 +83,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt6334354",
                 title = "The Suicide Squad",
                 poster = "https://upload.wikimedia.org/wikipedia/en/4/4e/The_Suicide_Squad_official_poster.jpeg",
                 genre = listOf(
@@ -105,6 +109,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt1745960",
                 title = "Top Gun: Maverick",
                 poster = "https://upload.wikimedia.org/wikipedia/en/d/d2/Top_Gun_Maverick.jpg",
                 genre = listOf(
@@ -128,6 +133,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt3480822",
                 title = "Black Widow",
                 poster = "https://upload.wikimedia.org/wikipedia/en/7/74/Black_Widow_poster.jpg",
                 genre = listOf(
@@ -150,6 +156,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt7097896",
                 title = "Venom: Let There Be Carnage",
                 poster = "https://upload.wikimedia.org/wikipedia/en/a/a7/Venom_Let_There_Be_Carnage_poster.jpg",
                 genre = listOf(
@@ -172,6 +179,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt10327252",
                 title = "The Forever Purge",
                 poster = "https://upload.wikimedia.org/wikipedia/en/e/e2/Forever_Purge_poster.jpg",
                 genre = listOf(
@@ -195,6 +203,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt9243804",
                 title = "The Green Knight",
                 poster = "https://upload.wikimedia.org/wikipedia/en/0/09/The_Green_Knight_poster.jpeg",
                 genre = listOf(
@@ -217,6 +226,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt9848626",
                 title = "Hotel Transylvania: Transformania",
                 poster = "https://upload.wikimedia.org/wikipedia/en/c/cf/Hotel_Transylvania_Transformania_poster.jpg",
                 genre = listOf(
@@ -239,6 +249,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt4733624",
                 title = "Fatherhood",
                 poster = "https://upload.wikimedia.org/wikipedia/en/f/f5/Fatherhood_poster.jpg",
                 genre = listOf(
@@ -261,6 +272,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt9357050",
                 title = "Dear Evan Hansen",
                 poster = "https://upload.wikimedia.org/wikipedia/en/9/91/DearEvanposter.png",
                 genre = listOf(
@@ -284,6 +296,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt2452150",
                 title = "Respect",
                 poster = "https://upload.wikimedia.org/wikipedia/en/4/4d/Respect_2020_film_poster.png",
                 genre = listOf(
@@ -306,6 +319,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt5562070",
                 title = "Wish Dragon",
                 poster = "https://upload.wikimedia.org/wikipedia/en/d/d7/Wish_Dragon.png",
                 genre = listOf(
@@ -329,6 +343,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt9777666",
                 title = "The Tomorrow War",
                 poster = "https://upload.wikimedia.org/wikipedia/en/6/60/The_Tomorrow_War_%282021_film%29_official_theatrical_poster.jpg",
                 genre = listOf(
@@ -351,6 +366,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt6264654",
                 title = "Free Guy",
                 poster = "https://upload.wikimedia.org/wikipedia/en/e/ea/Free_Guy_Theatrical_First_Poster.jpg",
                 genre = listOf(
@@ -373,6 +389,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt9032400",
                 title = "Eternals",
                 poster = "https://upload.wikimedia.org/wikipedia/en/2/23/Eternals_poster.jpeg",
                 genre = listOf(
@@ -395,6 +412,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt9844522",
                 title = "Escape Room: Tournament of Champions",
                 poster = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTBFWOWm47nXfuPBcDcEMmS5QsxwX0DSwgnz4FLNwDD45Omtxaz",
                 genre = listOf(
@@ -419,6 +437,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt4513678",
                 title = "Ghostbusters: Afterlife",
                 poster = "https://upload.wikimedia.org/wikipedia/en/b/bb/Ghostbusters_Afterlife_-_teaser_poster.jpeg",
                 genre = listOf(
@@ -441,6 +460,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt0870154",
                 title = "Jungle Cruise",
                 poster = "https://upload.wikimedia.org/wikipedia/en/c/c6/Jungle_Cruise_-_theatrical_poster.png",
                 genre = listOf(
@@ -471,6 +491,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt9140554",
                 title = "Loki",
                 poster = "https://upload.wikimedia.org/wikipedia/en/4/4e/Loki_%28TV_series%29_logo.png",
                 genre = listOf(
@@ -493,6 +514,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt10814438",
                 title = "Betty: Season 2",
                 poster = "https://upload.wikimedia.org/wikipedia/en/f/f0/Betty_HBO_poster.png",
                 genre = listOf(
@@ -513,6 +535,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt8128344",
                 title = "Flack: Season 2",
                 poster = "https://m.media-amazon.com/images/M/MV5BZmQ3MTA4NDgtN2QzOS00MWE2LTg1MjktY2U3YmVjMmQ3YmU0XkEyXkFqcGdeQXVyNjcyNjcyMzQ@._V1_.jpg",
                 genre = listOf(
@@ -536,6 +559,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt6053512",
                 title = "Home Before Dark: Season 2",
                 poster = "https://upload.wikimedia.org/wikipedia/en/1/12/Home_Before_Dark_%28TV_series%29_title_card.png",
                 genre = listOf(
@@ -558,6 +582,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt10166602",
                 title = "Love, Victor: Season 2",
                 poster = "https://upload.wikimedia.org/wikipedia/commons/c/cd/Love%2C_Victor_Title_Logo.jpg",
                 genre = listOf(
@@ -581,6 +606,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt2531336",
                 title = "Lupin: Season 2",
                 poster = "https://upload.wikimedia.org/wikipedia/en/f/f1/Lupin_logo.png",
                 genre = listOf(
@@ -604,6 +630,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt11097374",
                 title = "Blindspotting",
                 poster = "https://pbs.twimg.com/media/Ewti_V4UUAQwHSB.jpg?format=jpg&name=small",
                 genre = listOf(
@@ -628,6 +655,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt8036272",
                 title = "Tuca & Bertie: Season 2",
                 poster = "https://upload.wikimedia.org/wikipedia/en/5/57/Tuca_%26_Bertie_Title_Card.jpg",
                 genre = listOf(
@@ -649,6 +677,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt11815244",
                 title = "The Republic of Sarah",
                 poster = "https://upload.wikimedia.org/wikipedia/en/c/c8/The_Republic_of_Sarah_Season_One_Poster.jpeg",
                 genre = listOf(
@@ -670,6 +699,7 @@ object DataDummy {
 
         detailFilm.add(
             DetailFilmEntity(
+                idFilm = "tt7134908",
                 title = "Elite: Season 4",
                 poster = "https://geotimes.id/wp-content/uploads/2017/08/ELITE1.jpg",
                 genre = listOf(

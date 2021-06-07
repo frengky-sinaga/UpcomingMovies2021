@@ -17,4 +17,8 @@ class FilmViewModel : ViewModel() {
 
     fun getDataDummy(index: Int): List<DetailFilmEntity> =
         if (index == 1) DataDummy.generateDummyMovie() else DataDummy.generateDummyTvShow()
+
+    fun getDataMovie(): List<DetailFilmEntity> = DataDummy.generateDummyMovie()
+
+    fun getDataTvShow(): List<DetailFilmEntity> = DataDummy.generateDummyTvShow()
 }

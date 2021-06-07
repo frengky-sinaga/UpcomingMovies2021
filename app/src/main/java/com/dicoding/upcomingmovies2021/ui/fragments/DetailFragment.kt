@@ -9,65 +9,85 @@ import coil.size.Scale
 import coil.transform.CircleCropTransformation
 import coil.transform.GrayscaleTransformation
 import com.dicoding.upcomingmovies2021.R
+import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
 import com.dicoding.upcomingmovies2021.databinding.FragmentDetailBinding
-import com.dicoding.upcomingmovies2021.ui.viewmodel.FilmViewModel
+import com.dicoding.upcomingmovies2021.ui.viewmodel.DetailViewModel
 import com.dicoding.upcomingmovies2021.utils.EnumChip
+import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import com.google.android.material.chip.Chip
 
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
+    companion object {
+        const val EXTRA_DATA = "extra_data"
+        const val EXTRA_TYPE = "extra_type"
+    }
+
     private lateinit var binding: FragmentDetailBinding
-    private lateinit var viewModel: FilmViewModel
+    private lateinit var viewModel: DetailViewModel
+    private lateinit var result: DetailFilmEntity
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailBinding.bind(view)
-        viewModel = ViewModelProvider(requireActivity()).get(FilmViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(DetailViewModel::class.java)
 
-        viewModel.getDataFilm().observe(viewLifecycleOwner, { data ->
-            binding.tvTitle.text = data.title
-            binding.tvReleaseDate.text = data.releaseDate
-            binding.contentDescription.text = data.description
-            binding.imgPoster.load(data.poster) {
-                scale(Scale.FIT)
-                placeholder(R.drawable.ic_placeholder)
-                crossfade(true)
-                crossfade(400)
-                transformations(GrayscaleTransformation())
+        arguments?.get(EXTRA_TYPE).also {
+            val id = arguments?.get(EXTRA_DATA)
+            result =
+                if (it == TypeFilm.Movie) viewModel.getDetailMovieById(id.toString()) else viewModel.getDetailTvShowById(
+                    id.toString()
+                )
+        }
+        populateData()
+    }
+
+    private fun populateData() {
+        binding.tvTitle.text = result.title
+        binding.tvReleaseDate.text = result.releaseDate
+        binding.contentDescription.text = result.description
+        binding.imgPoster.load(result.poster) {
+            scale(Scale.FIT)
+            placeholder(R.drawable.ic_placeholder)
+            crossfade(true)
+            crossfade(400)
+            transformations(GrayscaleTransformation())
+        }
+        binding.imgIcon.load(result.poster) {
+            placeholder(R.drawable.ic_placeholder)
+            transformations(CircleCropTransformation())
+        }
+        for (genre in result.genre) {
+            createChip(genre.toString(), EnumChip.Genre)
+        }
+        for (star in result.crews.stars) {
+            createChip(star, EnumChip.Star)
+        }
+        val visible = View.VISIBLE
+        if (result.crews.directors != null) {
+            binding.tvDirectors.visibility = visible
+            binding.chipDirectors.visibility = visible
+            for (director in result.crews.directors!!) {
+                createChip(director, EnumChip.Director)
             }
-            binding.imgIcon.load(data.poster) {
-                placeholder(R.drawable.ic_placeholder)
-                transformations(CircleCropTransformation())
+        }
+        if (result.crews.writers != null) {
+            binding.chipWriters.visibility = visible
+            binding.tvWriters.visibility = visible
+            for (writer in result.crews.writers!!) {
+                createChip(writer, EnumChip.Writer)
             }
-            for (genre in data.genre) {
-                createChip(genre.toString(), EnumChip.Genre)
+        }
+        if (result.crews.creators != null) {
+            binding.chipCreators.visibility = visible
+            binding.tvCreators.visibility = visible
+            for (creator in result.crews.creators!!) {
+                createChip(creator, EnumChip.Creator)
             }
-            for (star in data.crews.stars) {
-                createChip(star, EnumChip.Star)
-            }
-            val visible = View.VISIBLE
-            if (data.crews.directors != null) {
-                binding.tvDirectors.visibility = visible
-                binding.chipDirectors.visibility = visible
-                for (director in data.crews.directors!!) {
-                    createChip(director, EnumChip.Director)
-                }
-            }
-            if (data.crews.writers != null) {
-                binding.chipWriters.visibility = visible
-                binding.tvWriters.visibility = visible
-                for (writer in data.crews.writers!!) {
-                    createChip(writer, EnumChip.Writer)
-                }
-            }
-            if (data.crews.creators != null) {
-                binding.chipCreators.visibility = visible
-                binding.tvCreators.visibility = visible
-                for (creator in data.crews.creators!!) {
-                    createChip(creator, EnumChip.Creator)
-                }
-            }
-        })
+        }
     }
 
     private fun createChip(txt: String, enumChip: EnumChip) {
@@ -89,3 +109,5 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         }
     }
 }
+
+

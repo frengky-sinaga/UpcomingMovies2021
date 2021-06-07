@@ -9,15 +9,11 @@ import coil.transform.RoundedCornersTransformation
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
 import com.dicoding.upcomingmovies2021.databinding.ItemsFilmBinding
+import com.dicoding.upcomingmovies2021.ui.OnItemClickCallback
 
-class RvAdapter : RecyclerView.Adapter<RvAdapter.ViewHolder>() {
+class RvAdapter(private val onItemClickCallback: OnItemClickCallback) :
+    RecyclerView.Adapter<RvAdapter.ViewHolder>() {
     private var listDetailFilms = ArrayList<DetailFilmEntity>()
-
-    private var onItemClickCallback: OnItemClickCallback? = null
-
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
 
     fun setDetail(detailFilm: List<DetailFilmEntity>?) {
         if (detailFilm == null) return
@@ -50,12 +46,10 @@ class RvAdapter : RecyclerView.Adapter<RvAdapter.ViewHolder>() {
                 tvItemTitle.text = detailFilm.title
                 tvItemDate.text = detailFilm.releaseDate
 
-                itemView.setOnClickListener { onItemClickCallback?.onItemClicked(detailFilm) }
+                itemView.setOnClickListener {
+                    onItemClickCallback.onItemClicked(detailFilm)
+                }
             }
         }
-    }
-
-    interface OnItemClickCallback {
-        fun onItemClicked(data: DetailFilmEntity)
     }
 }

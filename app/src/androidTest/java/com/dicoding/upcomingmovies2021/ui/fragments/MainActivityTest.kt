@@ -26,15 +26,9 @@ class MainActivityTest {
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-    /***
-     * Test
-     * 1. Is recyclerView displaying?
-     * 2. Scrolling recyclerView to last dummyMovie
-     */
     @Test
     fun loadMovie() {
-        //test
-        onView(allOf(withId(R.id.rv_movie), isDisplayed()))
+        onView(allOf(withId(R.id.rv_film), isDisplayed()))
             .perform(
                 RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
                     dummyMovie.size
@@ -42,17 +36,10 @@ class MainActivityTest {
             )
     }
 
-    /***
-     * Test
-     * 1. Swipe left
-     * 2. Is recyclerView displaying?
-     * 3. Scrolling recyclerView to last dummyTvShow
-     */
     @Test
     fun loadTvShow() {
-        //test
         onView(withId(R.id.viewPager)).perform(swipeLeft())
-        onView(allOf(withId(R.id.rv_movie), isDisplayed()))
+        onView(allOf(withId(R.id.rv_film), isDisplayed()))
             .perform(
                 RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
                     dummyTvShow.size
@@ -60,21 +47,10 @@ class MainActivityTest {
             )
     }
 
-    /***
-     * Test
-     * 1. Is title displaying?
-     * 2. Is the title same as the title of first dummyTvShow?
-     * 3. Is list of genre displaying?
-     * 4. Is the content of description same as the description of first dummyTvShow?
-     * 5. Is the release date same as the releaseDate of first dummyTvShow?
-     * 6. Is list of stars displaying?
-     * 7. Is list of directors displaying when its not null?
-     */
     @Test
     fun viewDetail() {
-        //setup
         onView(withId(R.id.viewPager)).perform(swipeLeft())
-        onView(allOf(withId(R.id.rv_movie), isDisplayed()))
+        onView(allOf(withId(R.id.rv_film), isDisplayed()))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                     0,
@@ -82,9 +58,10 @@ class MainActivityTest {
                 )
             )
 
-        //test
         onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_title)).check(matches(withText(dummyTvShow[0].title)))
+        onView(withId(R.id.img_poster)).check(matches(isDisplayed()))
+        onView(withId(R.id.img_icon)).check(matches(isDisplayed()))
         onView(withId(R.id.chip_genre)).check(matches(isDisplayed()))
         onView(withId(R.id.content_description)).check(matches(withText(dummyTvShow[0].description)))
         onView(withId(R.id.tv_release_date)).check(matches(withText(dummyTvShow[0].releaseDate)))
@@ -93,6 +70,14 @@ class MainActivityTest {
         val director = dummyTvShow[0].crews.directors.isNullOrEmpty()
         if (!director) {
             onView(withId(R.id.chip_directors)).check(matches(isDisplayed()))
+        }
+        val writer = dummyTvShow[0].crews.writers.isNullOrEmpty()
+        if (!writer) {
+            onView(withId(R.id.chip_writers)).check(matches(isDisplayed()))
+        }
+        val creator = dummyTvShow[0].crews.creators.isNullOrEmpty()
+        if (!creator) {
+            onView(withId(R.id.chip_creators)).check(matches(isDisplayed()))
         }
     }
 }

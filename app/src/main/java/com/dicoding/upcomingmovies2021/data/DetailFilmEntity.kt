@@ -4,6 +4,7 @@ import com.dicoding.upcomingmovies2021.utils.Genre
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 
 data class DetailFilmEntity(
+    var idFilm: String,
     var title: String,
     var poster: String,
     var genre: List<Genre>,
