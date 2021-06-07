@@ -17,6 +17,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        // The following argument makes the Android Test Orchestrator run its
+        // "pm clear" command after each test invocation. This command ensures
+        // that the app's state is completely cleared between tests.
+        testInstrumentationRunnerArguments clearPackageData: 'true'
     }
 
     buildTypes {
@@ -37,6 +41,10 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
 }
 
@@ -65,4 +73,5 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
     debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
     testImplementation "androidx.arch.core:core-testing:$androidXArchCoreVersion"
+    androidTestUtil "androidx.test:orchestrator:$androidTestVersion"
 }
