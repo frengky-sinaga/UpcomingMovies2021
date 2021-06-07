@@ -1,21 +1,16 @@
 package com.dicoding.upcomingmovies2021.ui.viewmodel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.dicoding.upcomingmovies2021.data.CrewFilmEntity
-import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
-import com.dicoding.upcomingmovies2021.utils.Genre
-import com.dicoding.upcomingmovies2021.utils.TypeFilm
-import org.junit.Test
+import com.dicoding.upcomingmovies2021.utils.DataDummy
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
-import org.junit.Rule
-import org.junit.Assert.*
+import org.junit.Test
 
 class FilmViewModelTest {
 
     private lateinit var viewModel: FilmViewModel
-
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
+    private val dummyMovie = DataDummy.generateDummyMovie()
+    private val dummyTvShow = DataDummy.generateDummyTvShow()
 
     @Before
     fun setUp() {
@@ -23,41 +18,16 @@ class FilmViewModelTest {
     }
 
     @Test
-    fun getDataFilm() {
-        val detailFilm = DetailFilmEntity(
-            title = "test",
-            poster = "link poster",
-            genre = listOf(Genre.Action),
-            crews = CrewFilmEntity(
-                directors = null,
-                writers = null,
-                stars = listOf("apple"),
-                creators = null
-            ),
-            typeFilm = TypeFilm.TvShow,
-            description = "This is a part of test",
-            releaseDate = "Unknown",
-            link = "unknown"
-        )
-        viewModel.setDataFilm(detailFilm)
-
-        val value = viewModel.getDataFilm().getOrAwaitValue()
-        assertNotNull(value)
-        assertEquals(detailFilm.title, value.title)
-        assertEquals(detailFilm.crews.directors, value.crews.directors)
-        assertEquals(detailFilm.description, value.description)
+    fun getDataMovie() {
+        val dataMovie = viewModel.getDataMovie()
+        assertNotNull(dataMovie)
+        assertEquals(dummyMovie.size, dataMovie.size)
     }
 
     @Test
-    fun getDataDummy() {
-        val movies = viewModel.getDataDummy(1)
-        assertNotNull(movies)
-        assertEquals(20, movies.size)
-        assertEquals(TypeFilm.Movie, movies[0].typeFilm)
-
-        val tvShow = viewModel.getDataDummy(2)
-        assertNotNull(tvShow)
-        assertEquals(10, tvShow.size)
-        assertEquals(TypeFilm.TvShow, tvShow[0].typeFilm)
+    fun getDataTvShow() {
+        val dataTvShow = viewModel.getDataTvShow()
+        assertNotNull(dataTvShow)
+        assertEquals(dummyTvShow.size, dataTvShow.size)
     }
 }
