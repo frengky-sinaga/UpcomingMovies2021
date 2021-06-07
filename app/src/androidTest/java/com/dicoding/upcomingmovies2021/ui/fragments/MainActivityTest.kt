@@ -43,58 +43,59 @@ class MainActivityTest {
     }
 
     @Test
-    fun viewDetailTvShow() {
-        onView(allOf(withId(R.id.viewPager), isDisplayed())).perform(swipeLeft())
-        onView(withId(R.id.rv_film)).perform(
+    fun viewDetailMovie() {
+        onView(allOf(withId(R.id.rv_film), isCompletelyDisplayed())).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
                 click()
             )
         )
 
-        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_title)).check(matches(withText(dummyTvShow[0].title)))
-        onView(withId(R.id.img_poster)).check(matches(isDisplayed()))
-        onView(withId(R.id.img_icon)).check(matches(isDisplayed()))
-        onView(withId(R.id.chip_genre)).check(matches(isDisplayed()))
-        onView(withId(R.id.content_description)).check(matches(withText(dummyTvShow[0].description)))
-        onView(withId(R.id.tv_release_date)).check(matches(withText(dummyTvShow[0].releaseDate)))
-        onView(withId(R.id.chip_stars)).check(matches(isDisplayed()))
+        onView(withId(R.id.fragment_detail)).perform(swipeDown())
 
-        val director = dummyTvShow[0].crews.directors.isNullOrEmpty()
-        if (!director) {
-            onView(withId(R.id.chip_directors)).check(matches(isDisplayed()))
-        }
-        val writer = dummyTvShow[0].crews.writers.isNullOrEmpty()
-        if (!writer) {
-            onView(withId(R.id.chip_writers)).check(matches(isDisplayed()))
-        }
-        val creator = dummyTvShow[0].crews.creators.isNullOrEmpty()
-        if (!creator) {
-            onView(withId(R.id.chip_creators)).check(matches(isDisplayed()))
-        }
-    }
-
-    @Test
-    fun viewDetailMovie() {
-        onView(allOf(withId(R.id.rv_film), isDisplayed()))
-            .perform(
-                RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                    0,
-                    click()
-                )
-            )
-
-        onView(allOf(withId(R.id.fragment_detail), isDisplayed())).perform(swipeDown())
         onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_title)).check(matches(withText(dummyMovie[0].title)))
+
         onView(withId(R.id.img_poster)).check(matches(isDisplayed()))
         onView(withId(R.id.img_icon)).check(matches(isDisplayed()))
-        onView(withId(R.id.chip_genre)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.content_description)).check(matches(isDisplayed()))
         onView(withId(R.id.content_description)).check(matches(withText(dummyMovie[0].description)))
+
+        onView(withId(R.id.tv_release_date)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_release_date)).check(matches(withText(dummyMovie[0].releaseDate)))
+
+        onView(withId(R.id.chip_genre)).check(matches(isDisplayed()))
         onView(withId(R.id.chip_stars)).check(matches(isDisplayed()))
         onView(withId(R.id.chip_directors)).check(matches(isDisplayed()))
         onView(withId(R.id.chip_writers)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun viewDetailTvShow() {
+        onView(allOf(withId(R.id.viewPager), isCompletelyDisplayed())).perform(swipeLeft())
+        onView(allOf(withId(R.id.rv_film), isCompletelyDisplayed())).perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                0,
+                click()
+            )
+        )
+
+        onView(withId(R.id.fragment_detail)).perform(swipeDown())
+
+        onView(withId(R.id.tv_title)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_title)).check(matches(withText(dummyTvShow[0].title)))
+
+        onView(withId(R.id.img_poster)).check(matches(isDisplayed()))
+        onView(withId(R.id.img_icon)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.content_description)).check(matches(isDisplayed()))
+        onView(withId(R.id.content_description)).check(matches(withText(dummyTvShow[0].description)))
+
+        onView(withId(R.id.tv_release_date)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_release_date)).check(matches(withText(dummyTvShow[0].releaseDate)))
+
+        onView(withId(R.id.chip_genre)).check(matches(isDisplayed()))
+        onView(withId(R.id.chip_stars)).check(matches(isDisplayed()))
     }
 }
