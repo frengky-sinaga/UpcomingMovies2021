@@ -8,16 +8,13 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.ui.MainActivity
 import com.dicoding.upcomingmovies2021.utils.DataDummy
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4ClassRunner::class)
 class MainActivityTest {
 
     private val dummyMovie = DataDummy.generateDummyMovie()
@@ -38,7 +35,7 @@ class MainActivityTest {
 
     @Test
     fun loadTvShow() {
-        onView(withId(R.id.viewPager)).perform(swipeLeft())
+        onView(allOf(withId(R.id.viewPager), isDisplayed())).perform(swipeLeft())
         onView(allOf(withId(R.id.rv_film), isDisplayed()))
             .perform(
                 RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
@@ -49,7 +46,7 @@ class MainActivityTest {
 
     @Test
     fun viewDetail() {
-        onView(withId(R.id.viewPager)).perform(swipeLeft())
+        onView(allOf(withId(R.id.viewPager), isDisplayed())).perform(swipeLeft())
         onView(allOf(withId(R.id.rv_film), isDisplayed()))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
