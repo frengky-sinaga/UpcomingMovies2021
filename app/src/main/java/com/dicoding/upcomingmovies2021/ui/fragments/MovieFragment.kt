@@ -8,16 +8,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.MovieResult
 import com.dicoding.upcomingmovies2021.databinding.FragmentMovieBinding
-import com.dicoding.upcomingmovies2021.ui.interfaces.OnMovieItemClickCallback
 import com.dicoding.upcomingmovies2021.ui.adapter.RvMovieAdapter
-import com.dicoding.upcomingmovies2021.ui.viewmodel.FilmViewModel
+import com.dicoding.upcomingmovies2021.ui.interfaces.OnMovieItemClickCallback
+import com.dicoding.upcomingmovies2021.ui.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MovieFragment : Fragment(R.layout.fragment_movie), OnMovieItemClickCallback {
 
     private lateinit var binding: FragmentMovieBinding
-    private val viewModel: FilmViewModel by viewModels()
+    private val viewModel: MovieViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

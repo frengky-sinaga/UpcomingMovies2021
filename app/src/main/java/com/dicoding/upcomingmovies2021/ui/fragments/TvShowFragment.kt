@@ -8,16 +8,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvShowResult
 import com.dicoding.upcomingmovies2021.databinding.FragmentTvShowBinding
-import com.dicoding.upcomingmovies2021.ui.interfaces.OnTvShowItemClickCallback
 import com.dicoding.upcomingmovies2021.ui.adapter.RvTvShowAdapter
-import com.dicoding.upcomingmovies2021.ui.viewmodel.FilmViewModel
+import com.dicoding.upcomingmovies2021.ui.interfaces.OnTvShowItemClickCallback
+import com.dicoding.upcomingmovies2021.ui.viewmodel.TvShowViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TvShowFragment : Fragment(R.layout.fragment_tv_show), OnTvShowItemClickCallback {
 
     lateinit var binding: FragmentTvShowBinding
-    private val viewModel: FilmViewModel by viewModels()
+    private val viewModel: TvShowViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
