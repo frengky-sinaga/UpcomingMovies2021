@@ -1,8 +1,11 @@
 package com.dicoding.upcomingmovies2021.data.source.remote.models.movie
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class MovieResult(
     @SerializedName("adult")
     val adult: Boolean,
@@ -32,4 +35,4 @@ data class MovieResult(
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int
-)
+) : Parcelable

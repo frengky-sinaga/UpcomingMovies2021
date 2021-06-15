@@ -1,8 +1,11 @@
 package com.dicoding.upcomingmovies2021.data.source.remote.models.movie
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class UpcomingMoviesResponse(
     @SerializedName("dates")
     val dates: Dates,
@@ -14,4 +17,4 @@ data class UpcomingMoviesResponse(
     val totalPages: Int,
     @SerializedName("total_results")
     val totalResults: Int
-)
+) : Parcelable
