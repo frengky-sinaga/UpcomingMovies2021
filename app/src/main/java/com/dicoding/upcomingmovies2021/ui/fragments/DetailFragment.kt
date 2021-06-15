@@ -63,36 +63,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             transformations(CircleCropTransformation())
         }
         for (genre in result.genre) {
-            createChip(genre.toString(), EnumChip.Genre)
-        }
-        for (star in result.crews.stars) {
-            createChip(star, EnumChip.Star)
-        }
-        val visible = View.VISIBLE
-        if (result.crews.directors != null) {
-            binding.tvDirectors.visibility = visible
-            binding.chipDirectors.visibility = visible
-            result.crews.directors?.forEach { director ->
-                createChip(director, EnumChip.Director)
-            }
-        }
-        if (result.crews.writers != null) {
-            binding.chipWriters.visibility = visible
-            binding.tvWriters.visibility = visible
-            result.crews.writers?.forEach { writer ->
-                createChip(writer, EnumChip.Writer)
-            }
-        }
-        if (result.crews.creators != null) {
-            binding.chipCreators.visibility = visible
-            binding.tvCreators.visibility = visible
-            result.crews.creators?.forEach { creator ->
-                createChip(creator, EnumChip.Creator)
-            }
+            createChip(genre.toString())
         }
     }
 
-    private fun createChip(txt: String, enumChip: EnumChip) {
+    private fun createChip(txt: String) {
         val chip = Chip(context)
         chip.apply {
             text = txt
@@ -100,14 +75,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             isCloseIconVisible = false
             isClickable = false
             isCheckable = false
-
-            when (enumChip) {
-                EnumChip.Genre -> binding.chipGenre.addView(chip)
-                EnumChip.Director -> binding.chipDirectors.addView(chip)
-                EnumChip.Star -> binding.chipStars.addView(chip)
-                EnumChip.Writer -> binding.chipWriters.addView(chip)
-                EnumChip.Creator -> binding.chipCreators.addView(chip)
-            }
+            binding.chipGenre.addView(chip)
         }
     }
 }
