@@ -7,18 +7,20 @@ import coil.load
 import coil.size.Scale
 import coil.transform.RoundedCornersTransformation
 import com.dicoding.upcomingmovies2021.R
-import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
+import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvShowResult
 import com.dicoding.upcomingmovies2021.databinding.ItemsFilmBinding
-import com.dicoding.upcomingmovies2021.ui.OnItemClickCallback
+import com.dicoding.upcomingmovies2021.ui.interfaces.OnTvShowItemClickCallback
+import com.dicoding.upcomingmovies2021.utils.Constants
 
-class RvAdapter(private val onItemClickCallback: OnItemClickCallback) :
-    RecyclerView.Adapter<RvAdapter.ViewHolder>() {
-    private var listDetailFilms = ArrayList<DetailFilmEntity>()
+class RvTvShowAdapter(private val tvShowCallback: OnTvShowItemClickCallback) :
+    RecyclerView.Adapter<RvTvShowAdapter.ViewHolder>() {
 
-    fun setDetail(detailFilm: List<DetailFilmEntity>?) {
-        if (detailFilm.isNullOrEmpty()) return
-        this.listDetailFilms.clear()
-        this.listDetailFilms.addAll(detailFilm)
+    private var listDetailTvShows = ArrayList<TvShowResult>()
+
+    fun setDetail(detailTvShow: List<TvShowResult>?) {
+        if (detailTvShow.isNullOrEmpty()) return
+        this.listDetailTvShows.clear()
+        this.listDetailTvShows.addAll(detailTvShow)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,27 +29,28 @@ class RvAdapter(private val onItemClickCallback: OnItemClickCallback) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listDetailFilms[position])
+        holder.bind(listDetailTvShows[position])
     }
 
-    override fun getItemCount(): Int = listDetailFilms.size
+    override fun getItemCount(): Int = listDetailTvShows.size
 
     inner class ViewHolder(private val binding: ItemsFilmBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(detailFilm: DetailFilmEntity) {
+        fun bind(detailTvShow: TvShowResult) {
             with(binding) {
-                imgPoster.load(detailFilm.poster) {
+                val urlPoster = Constants.API_POSTER_PATH + detailTvShow.posterPath
+                imgPoster.load(urlPoster) {
                     scale(Scale.FIT)
                     placeholder(R.drawable.ic_placeholder)
                     crossfade(true)
                     crossfade(500)
                     transformations(RoundedCornersTransformation(20f))
                 }
-                tvItemTitle.text = detailFilm.title
-                tvItemDate.text = detailFilm.releaseDate
+                tvItemTitle.text = detailTvShow.name
+                tvItemDate.text = detailTvShow.firstAirDate
 
                 itemView.setOnClickListener {
-                    onItemClickCallback.onItemClicked(detailFilm)
+                    tvShowCallback.onItemClicked(detailTvShow)
                 }
             }
         }
