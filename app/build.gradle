@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -17,10 +19,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
-        // The following argument makes the Android Test Orchestrator run its
-        // "pm clear" command after each test invocation. This command ensures
-        // that the app's state is completely cleared between tests.
         testInstrumentationRunnerArguments clearPackageData: 'true'
+        buildConfigField("String", "API_KEY", API_KEY)
     }
 
     buildTypes {
@@ -70,8 +70,39 @@ dependencies {
     androidTestImplementation "androidx.test:rules:$androidTestVersion"
     androidTestImplementation "androidx.test:core:$androidTestVersion"
     androidTestImplementation "androidx.test.ext:junit-ktx:$junitExtversion"
-    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
-    debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
     testImplementation "androidx.arch.core:core-testing:$androidXArchCoreVersion"
     androidTestUtil "androidx.test:orchestrator:$androidTestVersion"
+
+    //fragment-ktx
+    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
+    debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
+
+    //activity ktx
+    implementation "androidx.activity:activity-ktx:1.2.3"
+
+    //lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+
+    //hilt
+    implementation 'com.google.dagger:hilt-android:2.37'
+    kapt 'com.google.dagger:hilt-compiler:2.37'
+    // hilt for instrumentation tests
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.37'
+    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.37'
+    // hilt for local unit tests
+    testImplementation 'com.google.dagger:hilt-android-testing:2.37'
+    kaptTest 'com.google.dagger:hilt-compiler:2.37'
+    // hilt for viewModel
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+}
+
+kapt {
+    correctErrorTypes true
 }
