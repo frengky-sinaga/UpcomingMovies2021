@@ -10,7 +10,9 @@ import com.dicoding.upcomingmovies2021.databinding.FragmentHomeBinding
 import com.dicoding.upcomingmovies2021.ui.adapter.SectionPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     companion object {

@@ -3,6 +3,7 @@ package com.dicoding.upcomingmovies2021.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.upcomingmovies2021.R
@@ -11,7 +12,9 @@ import com.dicoding.upcomingmovies2021.databinding.FragmentFilmBinding
 import com.dicoding.upcomingmovies2021.ui.OnItemClickCallback
 import com.dicoding.upcomingmovies2021.ui.adapter.RvAdapter
 import com.dicoding.upcomingmovies2021.ui.viewmodel.FilmViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FilmFragment : Fragment(R.layout.fragment_film), OnItemClickCallback {
 
     companion object {
@@ -27,16 +30,12 @@ class FilmFragment : Fragment(R.layout.fragment_film), OnItemClickCallback {
     }
 
     private lateinit var binding: FragmentFilmBinding
-    private lateinit var viewModel: FilmViewModel
+    private val viewModel: FilmViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentFilmBinding.bind(view)
 
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(FilmViewModel::class.java)
         val index = arguments?.getInt(ARG_SECTION_NUMBER, 0)
 
         if (index != null) {
@@ -57,7 +56,7 @@ class FilmFragment : Fragment(R.layout.fragment_film), OnItemClickCallback {
     }
 
     override fun onItemClicked(data: DetailFilmEntity) {
-        val bundle = Bundle()
+        /*val bundle = Bundle()
         bundle.putString(DetailFragment.EXTRA_DATA, data.idFilm)
         bundle.putSerializable(DetailFragment.EXTRA_TYPE, data.typeFilm)
 
@@ -73,6 +72,6 @@ class FilmFragment : Fragment(R.layout.fragment_film), OnItemClickCallback {
             )
             addToBackStack(null)
             commit()
-        }
+        }*/
     }
 }

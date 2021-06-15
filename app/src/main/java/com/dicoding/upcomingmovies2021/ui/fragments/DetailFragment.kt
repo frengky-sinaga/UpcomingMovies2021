@@ -15,7 +15,9 @@ import com.dicoding.upcomingmovies2021.ui.viewmodel.DetailViewModel
 import com.dicoding.upcomingmovies2021.utils.EnumChip
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     companion object {

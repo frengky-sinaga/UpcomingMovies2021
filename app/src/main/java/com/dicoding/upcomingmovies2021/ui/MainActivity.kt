@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.databinding.ActivityMainBinding
 import com.dicoding.upcomingmovies2021.ui.fragments.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
