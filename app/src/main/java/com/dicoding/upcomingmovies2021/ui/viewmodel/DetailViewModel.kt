@@ -2,9 +2,15 @@ package com.dicoding.upcomingmovies2021.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
+import com.dicoding.upcomingmovies2021.repositories.FilmRepository
 import com.dicoding.upcomingmovies2021.utils.DataDummy
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailViewModel : ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor(
+    private val filmRepository: FilmRepository
+) : ViewModel() {
 
     private fun getListMovie(): List<DetailFilmEntity> = DataDummy.generateDummyMovie()
     private fun getListTvShow(): List<DetailFilmEntity> = DataDummy.generateDummyTvShow()

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.MovieResult
@@ -11,16 +12,18 @@ import com.dicoding.upcomingmovies2021.databinding.FragmentMovieBinding
 import com.dicoding.upcomingmovies2021.ui.adapter.RvMovieAdapter
 import com.dicoding.upcomingmovies2021.ui.interfaces.OnMovieItemClickCallback
 import com.dicoding.upcomingmovies2021.ui.viewmodel.MovieViewModel
+import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MovieFragment : Fragment(R.layout.fragment_movie), OnMovieItemClickCallback {
 
-    private lateinit var binding: FragmentMovieBinding
     private val viewModel: MovieViewModel by viewModels()
+    private lateinit var binding: FragmentMovieBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentMovieBinding.bind(view)
 
         setAdapter()
@@ -39,22 +42,8 @@ class MovieFragment : Fragment(R.layout.fragment_movie), OnMovieItemClickCallbac
     }
 
     override fun onItemClicked(data: MovieResult) {
-        /*val bundle = Bundle()
-        bundle.putString(DetailFragment.EXTRA_DATA, data.idFilm)
-        bundle.putSerializable(DetailFragment.EXTRA_TYPE, data.typeFilm)
-
-        val detailFragment = DetailFragment()
-        detailFragment.arguments = bundle
-
-        val fm = activity?.supportFragmentManager
-        fm?.beginTransaction()?.apply {
-            replace(
-                R.id.main_container,
-                detailFragment,
-                DetailFragment::class.java.simpleName
-            )
-            addToBackStack(null)
-            commit()
-        }*/
+        val action =
+            HomeFragmentDirections.actionHomeFragmentToDetailFragment(data.id, TypeFilm.Movie)
+        findNavController().navigate(action)
     }
 }

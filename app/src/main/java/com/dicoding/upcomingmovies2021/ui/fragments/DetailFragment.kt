@@ -1,9 +1,11 @@
 package com.dicoding.upcomingmovies2021.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import coil.load
 import coil.size.Scale
 import coil.transform.CircleCropTransformation
@@ -12,27 +14,27 @@ import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.DetailFilmEntity
 import com.dicoding.upcomingmovies2021.databinding.FragmentDetailBinding
 import com.dicoding.upcomingmovies2021.ui.viewmodel.DetailViewModel
-import com.dicoding.upcomingmovies2021.utils.EnumChip
-import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.fragment_detail) {
 
-    companion object {
-        const val EXTRA_DATA = "extra_data"
-        const val EXTRA_TYPE = "extra_type"
-    }
-
+    private val viewModel: DetailViewModel by viewModels()
+    private val args: DetailFragmentArgs by navArgs()
     private lateinit var binding: FragmentDetailBinding
-    private lateinit var viewModel: DetailViewModel
     private lateinit var result: DetailFilmEntity
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailBinding.bind(view)
-        viewModel = ViewModelProvider(
+
+        val extraId = args.extraId
+        val extraTypeFilm = args.extraTypeFilm
+
+        Log.d("id & typeFilm", "$extraId with $extraTypeFilm")
+
+        /*viewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(DetailViewModel::class.java)
@@ -43,8 +45,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 if (it == TypeFilm.Movie) viewModel.getDetailMovieById(id.toString()) else viewModel.getDetailTvShowById(
                     id.toString()
                 )
-        }
-        populateData()
+        }*/
+        //populateData()
     }
 
     private fun populateData() {
