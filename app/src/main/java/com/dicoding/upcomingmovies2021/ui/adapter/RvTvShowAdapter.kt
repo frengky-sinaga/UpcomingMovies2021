@@ -2,6 +2,7 @@ package com.dicoding.upcomingmovies2021.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
@@ -9,11 +10,11 @@ import coil.transform.RoundedCornersTransformation
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvShowResult
 import com.dicoding.upcomingmovies2021.databinding.ItemsFilmBinding
-import com.dicoding.upcomingmovies2021.ui.interfaces.OnTvShowItemClickCallback
+import com.dicoding.upcomingmovies2021.ui.fragments.HomeFragmentDirections
 import com.dicoding.upcomingmovies2021.utils.Constants
+import com.dicoding.upcomingmovies2021.utils.TypeFilm
 
-class RvTvShowAdapter(private val tvShowCallback: OnTvShowItemClickCallback) :
-    RecyclerView.Adapter<RvTvShowAdapter.ViewHolder>() {
+class RvTvShowAdapter : RecyclerView.Adapter<RvTvShowAdapter.ViewHolder>() {
 
     private var listDetailTvShows = ArrayList<TvShowResult>()
 
@@ -50,7 +51,12 @@ class RvTvShowAdapter(private val tvShowCallback: OnTvShowItemClickCallback) :
                 tvItemDate.text = detailTvShow.firstAirDate
 
                 itemView.setOnClickListener {
-                    tvShowCallback.onItemClicked(detailTvShow)
+                    val direction =
+                        HomeFragmentDirections.actionHomeFragmentToDetailFragment(
+                            detailTvShow.id,
+                            TypeFilm.TvShow
+                        )
+                    it.findNavController().navigate(direction)
                 }
             }
         }

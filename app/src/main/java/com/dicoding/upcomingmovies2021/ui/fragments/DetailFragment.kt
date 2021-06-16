@@ -32,7 +32,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         val extraId = args.extraId
         val extraTypeFilm = args.extraTypeFilm
 
-        Log.d("id & typeFilm", "$extraId with $extraTypeFilm")
+        Log.d("idFilm", "$extraId with $extraTypeFilm")
 
         /*viewModel = ViewModelProvider(
             this,
