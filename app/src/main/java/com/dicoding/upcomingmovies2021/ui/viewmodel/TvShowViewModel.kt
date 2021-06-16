@@ -34,7 +34,6 @@ class TvShowViewModel @Inject constructor(
                         val result = it.results
                         for (tvShow in result) {
                             arrResult.add(tvShow)
-                            Log.d("movieDb", tvShow.toString())
                         }
                         _tvShowResponse.postValue(arrResult)
                     }

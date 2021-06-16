@@ -7,6 +7,7 @@ This app implements:
 - MVVM
 - Retrofit
 - Hilt
+- SafeArgs
 
 ## Next Features
 - Room Database

@@ -34,7 +34,6 @@ class MovieViewModel @Inject constructor(
                         val result = it.results
                         for (movie in result) {
                             arrResult.add(movie)
-                            Log.d("movieDb", movie.toString())
                         }
                         _movieResponse.postValue(arrResult)
                     }
