@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
+    app:layoutDescription="@xml/fragment_detail_scene"
     tools:context=".ui.fragments.DetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -50,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="fitXY"
+        android:transitionName="transition_image"
         app:layout_constraintBottom_toBottomOf="@id/guideline_center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -173,4 +175,4 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_right_detailFilm"
         app:layout_constraintStart_toStartOf="@id/guideline_left_detailFilm"
         app:layout_constraintTop_toBottomOf="@id/description_detailFilm" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

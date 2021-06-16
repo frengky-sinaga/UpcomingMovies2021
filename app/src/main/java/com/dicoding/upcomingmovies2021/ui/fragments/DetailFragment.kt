@@ -1,6 +1,7 @@
 package com.dicoding.upcomingmovies2021.ui.fragments
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val viewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
     private lateinit var binding: FragmentDetailBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val animation =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.explode)
+        sharedElementEnterTransition = animation
+        sharedElementReturnTransition = animation
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +68,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     error(R.drawable.ic_broken_image)
                     fallback(R.drawable.ic_placeholder)
                     crossfade(true)
-                    crossfade(400)
+                    crossfade(150)
                 }
 
                 for (genre in detailMovie.genres) {
@@ -95,7 +104,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     error(R.drawable.ic_broken_image)
                     fallback(R.drawable.ic_placeholder)
                     crossfade(true)
-                    crossfade(400)
+                    crossfade(150)
                 }
 
                 for (genre in detailTvShow.genres) {
