@@ -1,16 +1,60 @@
 package com.dicoding.upcomingmovies2021.repositories
 
-import com.dicoding.upcomingmovies2021.data.source.remote.network.TheMovieDbApiService
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import com.dicoding.upcomingmovies2021.data.source.remote.RemoteDataSourceImpl
+import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.DetailMovieResponse
+import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.UpcomingMoviesResponse
+import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.DetailTvShowResponse
+import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvOnTheAirResponse
+import com.dicoding.upcomingmovies2021.data.source.remote.network.ApiResponse
+import com.dicoding.upcomingmovies2021.utils.Resource
 import javax.inject.Inject
+import javax.inject.Singleton
 
 class FilmRepository @Inject constructor(
-    private val movieDbApiService: TheMovieDbApiService
+    private val remoteDataSource: RemoteDataSourceImpl
 ) {
-    suspend fun getUpcomingMovies() = movieDbApiService.getUpcomingMovie()
 
-    suspend fun getDetailMovie(id: Int) = movieDbApiService.getDetailMovie(id)
+    fun getUpcomingMovies(): LiveData<Resource<UpcomingMoviesResponse>> {
+        return result(
+            MediatorLiveData<Resource<UpcomingMoviesResponse>>(),
+            remoteDataSource.getUpcomingMovies()
+        )
+    }
 
-    suspend fun getTvShows() = movieDbApiService.getTvShowOnTheAir()
+    fun getTvOnTheAir(): LiveData<Resource<TvOnTheAirResponse>> {
+        return result(
+            MediatorLiveData<Resource<TvOnTheAirResponse>>(),
+            remoteDataSource.getTvOnTheAir()
+        )
+    }
 
-    suspend fun getDetailTvShow(id: Int) = movieDbApiService.getDetailTvShow(id)
+    fun getDetailMovie(movieId: Int): LiveData<Resource<DetailMovieResponse>> {
+        return result(
+            MediatorLiveData<Resource<DetailMovieResponse>>(),
+            remoteDataSource.getDetailMovie(movieId)
+        )
+    }
+
+    fun getDetailTvShow(tvShowId: Int): LiveData<Resource<DetailTvShowResponse>> {
+        return result(
+            MediatorLiveData<Resource<DetailTvShowResponse>>(),
+            remoteDataSource.getDetailTvShow(tvShowId)
+        )
+    }
+
+    private fun <T> result(
+        result: MediatorLiveData<Resource<T>>, response: LiveData<ApiResponse<T>>
+    ): LiveData<Resource<T>> {
+        result.postValue(Resource.loading())
+        result.addSource(response) {
+            result.removeSource(response)
+            when (it) {
+                is ApiResponse.Success -> result.postValue(Resource.success(it.data))
+                is ApiResponse.Error -> result.postValue(Resource.error(it.errorMessage))
+            }
+        }
+        return result
+    }
 }

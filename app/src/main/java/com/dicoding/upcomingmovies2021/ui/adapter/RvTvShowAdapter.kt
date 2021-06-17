@@ -58,7 +58,7 @@ class RvTvShowAdapter : RecyclerView.Adapter<RvTvShowAdapter.ViewHolder>() {
                             TypeFilm.TvShow
                         )
                     val extra = FragmentNavigatorExtras(imgPoster to "transition_image")
-                    it.findNavController().navigate(direction)
+                    it.findNavController().navigate(direction, extra)
                 }
             }
         }
