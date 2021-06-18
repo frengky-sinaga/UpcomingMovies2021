@@ -2,7 +2,7 @@ package com.dicoding.upcomingmovies2021.di
 
 import com.dicoding.upcomingmovies2021.data.source.remote.RemoteDataSourceImpl
 import com.dicoding.upcomingmovies2021.data.source.remote.network.TheMovieDbApiService
-import com.dicoding.upcomingmovies2021.repositories.FilmRepository
+import com.dicoding.upcomingmovies2021.data.repositories.FilmRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -16,6 +16,10 @@
         <argument
             android:name="extraTypeFilm"
             app:argType="com.dicoding.upcomingmovies2021.utils.TypeFilm" />
+        <argument
+            android:name="extraTitle"
+            app:argType="string"
+            android:defaultValue="Detail Film" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

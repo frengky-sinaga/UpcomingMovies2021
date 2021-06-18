@@ -8,7 +8,7 @@ import org.junit.Test
 
 class FilmViewModelTest {
 
-    private lateinit var viewModel: FilmViewModel
+    /*private lateinit var viewModel: FilmViewModel
     private val dummyMovie = DataDummy.generateDummyMovie()
     private val dummyTvShow = DataDummy.generateDummyTvShow()
 
@@ -29,5 +29,5 @@ class FilmViewModelTest {
         val dataTvShow = viewModel.getDataTvShow()
         assertNotNull(dataTvShow)
         assertEquals(dummyTvShow.size, dataTvShow.size)
-    }
+    }*/
 }

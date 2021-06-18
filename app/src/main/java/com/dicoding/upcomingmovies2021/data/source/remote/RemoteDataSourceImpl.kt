@@ -47,7 +47,7 @@ class RemoteDataSourceImpl @Inject constructor(
                 val dataResponse = response.body()
                 mutableLiveData.postValue(
                     if (dataResponse != null) ApiResponse.Success(dataResponse)
-                    else ApiResponse.Error(response.message())
+                    else ApiResponse.Empty()
                 )
             }
 

@@ -6,7 +6,7 @@ import org.junit.Before
 import org.junit.Test
 
 class DetailViewModelTest{
-    private lateinit var viewModel: DetailViewModel
+    /*private lateinit var viewModel: DetailViewModel
     private val dummyMovie = DataDummy.generateDummyMovie()[0]
     private val dummyTvShow = DataDummy.generateDummyTvShow()[0]
     private val movieId = dummyMovie.idFilm
@@ -41,5 +41,5 @@ class DetailViewModelTest{
         assertEquals(dummyTvShow.genre, dataTvShow.genre)
         assertEquals(dummyTvShow.poster, dataTvShow.poster)
         assertEquals(dummyTvShow.link, dataTvShow.link)
-    }
+    }*/
 }

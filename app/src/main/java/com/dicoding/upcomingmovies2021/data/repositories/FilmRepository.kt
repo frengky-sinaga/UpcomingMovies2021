@@ -1,4 +1,4 @@
-package com.dicoding.upcomingmovies2021.repositories
+package com.dicoding.upcomingmovies2021.data.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -10,7 +10,6 @@ import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvOnTheA
 import com.dicoding.upcomingmovies2021.data.source.remote.network.ApiResponse
 import com.dicoding.upcomingmovies2021.utils.Resource
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class FilmRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSourceImpl
@@ -53,6 +52,7 @@ class FilmRepository @Inject constructor(
             when (it) {
                 is ApiResponse.Success -> result.postValue(Resource.success(it.data))
                 is ApiResponse.Error -> result.postValue(Resource.error(it.errorMessage))
+                is ApiResponse.Empty -> result.postValue(Resource.empty())
             }
         }
         return result

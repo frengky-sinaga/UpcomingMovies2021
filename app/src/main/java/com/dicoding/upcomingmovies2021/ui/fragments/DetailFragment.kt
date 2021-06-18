@@ -1,9 +1,8 @@
 package com.dicoding.upcomingmovies2021.ui.fragments
 
 import android.os.Bundle
-import android.transition.TransitionInflater
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,51 +25,43 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val args: DetailFragmentArgs by navArgs()
     private lateinit var binding: FragmentDetailBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val animation =
-            TransitionInflater.from(requireContext())
-                .inflateTransition(android.R.transition.explode)
-        sharedElementEnterTransition = animation
-        sharedElementReturnTransition = animation
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentDetailBinding.bind(view)
 
-        val extraId = args.extraId
         val extraTypeFilm = args.extraTypeFilm
-
-        Log.d("movieDb", "$extraId with $extraTypeFilm")
+        val extraTitle = args.extraTitle
 
         if (extraTypeFilm == TypeFilm.Movie) setupDetailMovieObservers()
         else if (extraTypeFilm == TypeFilm.TvShow) setupDetailTvShowObservers()
+
+        setupToolbar(extraTitle)
     }
 
     private fun setupDetailMovieObservers() {
         viewModel.movieDetail?.observe(viewLifecycleOwner, { resources ->
             when (resources.status) {
                 Resource.Status.SUCCESS -> {
+                    dismissLoading()
                     resources.data?.let { data ->
-                        setupToolbar(data.title)
                         data.overview?.let { setupTv(data.originalTitle, data.releaseDate, it) }
                         data.backdropPath?.let { setupImg(it) }
                         for (genre in data.genres) {
                             createChip(genre.name, 0)
                         }
-
                         for (company in data.productionCompanies) {
                             createChip(company.name, 1)
                         }
                     }
                 }
                 Resource.Status.ERROR -> {
-
+                    dismissLoading()
+                    resources.message?.let {
+                        showToast(it)
+                    }
                 }
-                Resource.Status.LOADING -> {
-
-                }
+                Resource.Status.LOADING -> showLoading()
+                Resource.Status.EMPTY -> dismissLoading()
             }
         })
     }
@@ -79,37 +70,38 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         viewModel.tvShowDetail?.observe(viewLifecycleOwner, { resources ->
             when (resources.status) {
                 Resource.Status.SUCCESS -> {
+                    dismissLoading()
                     resources.data?.let { data ->
-                        setupToolbar(data.originalName)
                         setupTv(data.originalName, data.firstAirDate, data.overview)
                         data.backdropPath?.let { setupImg(it) }
                         for (genre in data.genres) {
                             createChip(genre.name, 0)
                         }
-
                         for (company in data.productionCompanies) {
                             createChip(company.name, 1)
                         }
                     }
                 }
                 Resource.Status.ERROR -> {
-
+                    dismissLoading()
+                    resources.message?.let {
+                        showToast(it)
+                    }
                 }
-                Resource.Status.LOADING -> {
-
-                }
+                Resource.Status.LOADING -> showLoading()
+                Resource.Status.EMPTY -> dismissLoading()
             }
         })
     }
 
-    private fun setupToolbar(titleToolbar: String) {
+    private fun setupToolbar(title: String) {
         binding.apply {
             (requireActivity() as AppCompatActivity).setSupportActionBar(toolbarDetailFilm)
-            toolbarDetailFilm.title = titleToolbar
             toolbarDetailFilm.setNavigationIcon(R.drawable.ic_back)
             toolbarDetailFilm.setNavigationOnClickListener {
                 activity?.onBackPressed()
             }
+            toolbarDetailFilm.title = title
         }
     }
 
@@ -146,5 +138,21 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             if (type == 0) binding.chipGenreDetailFilm.addView(chip)
             else if (type == 1) binding.chipProductionCompanyDetailFilm.addView(chip)
         }
+    }
+
+    private fun showLoading() {
+        binding.apply {
+            progressDetail.visibility = View.VISIBLE
+        }
+    }
+
+    private fun dismissLoading() {
+        binding.apply {
+            progressDetail.visibility = View.GONE
+        }
+    }
+
+    private fun showToast(text: String) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 }

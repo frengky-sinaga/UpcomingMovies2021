@@ -5,7 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.DetailMovieResponse
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.DetailTvShowResponse
-import com.dicoding.upcomingmovies2021.repositories.FilmRepository
+import com.dicoding.upcomingmovies2021.data.repositories.FilmRepository
 import com.dicoding.upcomingmovies2021.utils.Resource
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import dagger.hilt.android.lifecycle.HiltViewModel

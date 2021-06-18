@@ -3,7 +3,6 @@ package com.dicoding.upcomingmovies2021.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
@@ -55,10 +54,10 @@ class RvMovieAdapter : RecyclerView.Adapter<RvMovieAdapter.ViewHolder>() {
                     val direction =
                         HomeFragmentDirections.actionHomeFragmentToDetailFragment(
                             detailMovie.id,
-                            TypeFilm.Movie
+                            TypeFilm.Movie,
+                            detailMovie.title
                         )
-                    val extra = FragmentNavigatorExtras(imgPoster to "transition_image")
-                    it.findNavController().navigate(direction, extra)
+                    it.findNavController().navigate(direction)
                 }
             }
         }

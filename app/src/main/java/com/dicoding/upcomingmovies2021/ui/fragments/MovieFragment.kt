@@ -2,6 +2,7 @@ package com.dicoding.upcomingmovies2021.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,17 +32,20 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         viewModel.movieResult.observe(viewLifecycleOwner, { resources ->
             when (resources.status) {
                 Resource.Status.SUCCESS -> {
+                    dismissLoading()
                     resources.data?.let {
                         val dataMovies = it.results.toMutableList()
                         setupRv(dataMovies)
                     }
                 }
                 Resource.Status.ERROR -> {
-
+                    dismissLoading()
+                    resources.message?.let {
+                        showToast(it)
+                    }
                 }
-                Resource.Status.LOADING -> {
-
-                }
+                Resource.Status.LOADING -> showLoading()
+                Resource.Status.EMPTY -> dismissLoading()
             }
         })
     }
@@ -54,5 +58,21 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
             setHasFixedSize(true)
             adapter = movieAdapter
         }
+    }
+
+    private fun showLoading() {
+        binding.apply {
+            progressMovie.visibility = View.VISIBLE
+        }
+    }
+
+    private fun dismissLoading() {
+        binding.apply {
+            progressMovie.visibility = View.GONE
+        }
+    }
+
+    private fun showToast(text: String) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
     }
 }
