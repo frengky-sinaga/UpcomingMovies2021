@@ -9,7 +9,6 @@ import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.DetailTv
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvOnTheAirResponse
 import com.dicoding.upcomingmovies2021.data.source.remote.network.ApiResponse
 import com.dicoding.upcomingmovies2021.utils.Resource
-import javax.inject.Inject
 
 class FilmRepositoryFake(private val remoteDataSource: RemoteDataSourceImpl) {
 
