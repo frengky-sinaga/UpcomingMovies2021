@@ -9,12 +9,8 @@ This app implements:
 - Hilt
 - SafeArgs
 
-## Next Features
-- Room Database
-- Paging
-
 ## Prerequisites
 You need to add API_KEY of [TheMovieDB](themoviedb.org) to gradle.properties
 
 ## Status
-On-progress
+Submission 2 Completed
