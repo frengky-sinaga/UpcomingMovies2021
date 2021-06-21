@@ -8,6 +8,7 @@ import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.DetailTv
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvOnTheAirResponse
 import com.dicoding.upcomingmovies2021.data.source.remote.network.ApiResponse
 import com.dicoding.upcomingmovies2021.data.source.remote.network.TheMovieDbApiService
+import com.dicoding.upcomingmovies2021.utils.EspressoIdlingResource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,6 +43,7 @@ class RemoteDataSourceImpl @Inject constructor(
     }
 
     private fun <T> enqueueCallback(mutableLiveData: MutableLiveData<ApiResponse<T>>): Callback<T?> {
+        EspressoIdlingResource.increment()
         return object : Callback<T?> {
             override fun onResponse(call: Call<T?>, response: Response<T?>) {
                 val dataResponse = response.body()
@@ -49,10 +51,12 @@ class RemoteDataSourceImpl @Inject constructor(
                     if (dataResponse != null) ApiResponse.Success(dataResponse)
                     else ApiResponse.Empty()
                 )
+                EspressoIdlingResource.decrement()
             }
 
             override fun onFailure(call: Call<T?>, t: Throwable) {
                 mutableLiveData.postValue(ApiResponse.Error(t.message.toString()))
+                EspressoIdlingResource.decrement()
             }
         }
     }

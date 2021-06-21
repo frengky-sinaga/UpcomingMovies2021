@@ -31,6 +31,8 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         val extraTypeFilm = args.extraTypeFilm
         val extraTitle = args.extraTitle
+        val extraId = args.extraId
+        viewModel.setData(extraTypeFilm, extraId)
 
         if (extraTypeFilm == TypeFilm.Movie) setupDetailMovieObservers()
         else if (extraTypeFilm == TypeFilm.TvShow) setupDetailTvShowObservers()
