@@ -8,6 +8,5 @@
     <string name="description">Description</string>
     <string name="date">Release Date</string>
     <string name="genre">Genre</string>
-    <string name="content_description">Content Description</string>
     <string name="production_company">Production Company</string>
 </resources>
