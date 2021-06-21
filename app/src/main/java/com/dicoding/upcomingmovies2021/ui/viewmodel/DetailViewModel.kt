@@ -18,7 +18,7 @@ class DetailViewModel @Inject constructor(
     var movieDetail: LiveData<Resource<DetailMovieResponse>>? = null
     var tvShowDetail: LiveData<Resource<DetailTvShowResponse>>? = null
 
-    fun setData(typeFilm: TypeFilm, id: Int){
+    fun setData(typeFilm: TypeFilm, id: Int) {
         when (typeFilm) {
             TypeFilm.Movie -> {
                 getDetailMovie(id)
@@ -30,11 +30,11 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private fun getDetailMovie(idMovie: Int){
+    private fun getDetailMovie(idMovie: Int) {
         movieDetail = filmRepository.getDetailMovie(idMovie)
     }
 
-    private fun getDetailTvShow(idTvShow: Int){
+    private fun getDetailTvShow(idTvShow: Int) {
         tvShowDetail = filmRepository.getDetailTvShow(idTvShow)
     }
 }

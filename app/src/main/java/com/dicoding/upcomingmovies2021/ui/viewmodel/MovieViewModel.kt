@@ -8,7 +8,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieViewModel @Inject constructor(
     private val filmRepository: FilmRepository
-): ViewModel() {
+) : ViewModel() {
 
     val movieResult by lazy {
         filmRepository.getUpcomingMovies()

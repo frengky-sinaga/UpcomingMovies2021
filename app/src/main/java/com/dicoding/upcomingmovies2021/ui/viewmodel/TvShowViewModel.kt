@@ -8,7 +8,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TvShowViewModel @Inject constructor(
     private val filmRepository: FilmRepository
-) : ViewModel(){
+) : ViewModel() {
 
     val tvShowResult by lazy {
         filmRepository.getTvOnTheAir()

@@ -74,13 +74,13 @@ class MainActivityTest {
             )
         )
         onView(withId(R.id.fragment_detail)).perform(swipeUp())
-        onView(withId(R.id.toolbar_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_title_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_release_date_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_description_detailFilm)).check(matches(isDisplayed()))
+        onView(withId(R.id.img_poster_detailFilm)).check(matches(isDisplayed()))
+        onView(withId(R.id.toolbar_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.chip_genre_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.chip_production_company_detailFilm)).check(matches(isDisplayed()))
-        onView(withId(R.id.img_poster_detailFilm)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -93,13 +93,13 @@ class MainActivityTest {
             )
         )
         onView(withId(R.id.fragment_detail)).perform(swipeUp())
-        onView(withId(R.id.toolbar_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_title_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_release_date_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_description_detailFilm)).check(matches(isDisplayed()))
+        onView(withId(R.id.img_poster_detailFilm)).check(matches(isDisplayed()))
+        onView(withId(R.id.toolbar_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.chip_genre_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.chip_production_company_detailFilm)).check(matches(isDisplayed()))
-        onView(withId(R.id.img_poster_detailFilm)).check(matches(isDisplayed()))
     }
 
     private fun swipeLeft(): ViewAction {
