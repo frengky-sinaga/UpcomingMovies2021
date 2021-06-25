@@ -7,7 +7,7 @@ import com.dicoding.upcomingmovies2021.data.repositories.FilmRepository
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvOnTheAirResponse
 import com.dicoding.upcomingmovies2021.utils.DummyData
 import com.dicoding.upcomingmovies2021.utils.LiveDataTestUtil
-import com.dicoding.upcomingmovies2021.utils.Resource
+import com.dicoding.upcomingmovies2021.vo.Resource
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule

@@ -13,7 +13,7 @@ import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.databinding.FragmentDetailBinding
 import com.dicoding.upcomingmovies2021.ui.viewmodel.DetailViewModel
 import com.dicoding.upcomingmovies2021.utils.Constants.API_BACKDROP_PATH
-import com.dicoding.upcomingmovies2021.utils.Resource
+import com.dicoding.upcomingmovies2021.vo.Resource
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint

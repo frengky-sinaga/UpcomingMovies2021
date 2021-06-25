@@ -1,4 +1,4 @@
-package com.dicoding.upcomingmovies2021.utils
+package com.dicoding.upcomingmovies2021.vo
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
 

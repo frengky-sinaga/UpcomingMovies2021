@@ -7,4 +7,6 @@ object Constants {
     const val API_KEY = BuildConfig.API_KEY
     const val API_POSTER_PATH = "https://image.tmdb.org/t/p/w300"
     const val API_BACKDROP_PATH = "https://image.tmdb.org/t/p/w500"
+
+    const val DB_NAME = "film_db"
 }

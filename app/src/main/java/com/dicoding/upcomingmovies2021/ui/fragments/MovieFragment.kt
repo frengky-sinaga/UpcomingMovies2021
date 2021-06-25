@@ -11,7 +11,7 @@ import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.MovieResu
 import com.dicoding.upcomingmovies2021.databinding.FragmentMovieBinding
 import com.dicoding.upcomingmovies2021.ui.adapter.RvMovieAdapter
 import com.dicoding.upcomingmovies2021.ui.viewmodel.MovieViewModel
-import com.dicoding.upcomingmovies2021.utils.Resource
+import com.dicoding.upcomingmovies2021.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

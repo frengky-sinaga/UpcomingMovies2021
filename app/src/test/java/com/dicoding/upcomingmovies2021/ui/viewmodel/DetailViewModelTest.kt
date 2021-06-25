@@ -8,7 +8,7 @@ import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.DetailMov
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.DetailTvShowResponse
 import com.dicoding.upcomingmovies2021.utils.DummyData
 import com.dicoding.upcomingmovies2021.utils.LiveDataTestUtil.getValue
-import com.dicoding.upcomingmovies2021.utils.Resource
+import com.dicoding.upcomingmovies2021.vo.Resource
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import org.junit.Assert.*
 import org.junit.Before
