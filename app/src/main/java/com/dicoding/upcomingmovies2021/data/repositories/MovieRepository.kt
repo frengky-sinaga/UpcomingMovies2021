@@ -50,7 +50,6 @@ class MovieRepository @Inject constructor(
                 }
                 movieLocalDataSource.insertMovies(movieList)
             }
-
         }.asLiveData()
     }
 
@@ -95,7 +94,6 @@ class MovieRepository @Inject constructor(
                 )
                 movieLocalDataSource.insertDetailMovie(detailMovie)
             }
-
         }.asLiveData()
     }
 }

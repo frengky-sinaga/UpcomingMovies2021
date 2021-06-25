@@ -49,7 +49,6 @@ class TvShowRepository @Inject constructor(
                 }
                 tvShowLocalDataSource.insertTvShows(tvShowList)
             }
-
         }.asLiveData()
     }
 
@@ -95,7 +94,6 @@ class TvShowRepository @Inject constructor(
                 )
                 tvShowLocalDataSource.insertDetailTvShow(detailTvShow)
             }
-
         }.asLiveData()
     }
 }

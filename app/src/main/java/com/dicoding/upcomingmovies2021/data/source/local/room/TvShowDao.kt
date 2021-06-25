@@ -8,7 +8,6 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.relatio
 
 @Dao
 interface TvShowDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTvShows(tvShowEntities: List<TvShowEntity>)
 

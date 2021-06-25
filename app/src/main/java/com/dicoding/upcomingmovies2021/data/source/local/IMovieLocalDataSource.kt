@@ -6,7 +6,6 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieEnt
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.relations.GenreWithMovies
 
 interface IMovieLocalDataSource {
-
     fun insertMovies(movieEntities: List<MovieEntity>)
     fun insertDetailMovie(detailMovieEntity: DetailMovieEntity)
     fun getMoviesOfGenre(movieGenreId: Int): LiveData<List<GenreWithMovies>>

@@ -1,4 +1,4 @@
-package com.dicoding.upcomingmovies2021.ui.fragments
+package com.dicoding.upcomingmovies2021.ui.fragments.home
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.databinding.FragmentHomeBinding
-import com.dicoding.upcomingmovies2021.ui.adapter.SectionPagerAdapter
+import com.dicoding.upcomingmovies2021.ui.adapter.home.HomeSectionPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +34,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setPagerAdapter() {
-        val sectionPagerAdapter = SectionPagerAdapter(this)
+        val sectionPagerAdapter = HomeSectionPagerAdapter(this)
         val viewPager: ViewPager2 = binding.viewPager
         viewPager.adapter = sectionPagerAdapter
         val tabs: TabLayout = binding.tabs

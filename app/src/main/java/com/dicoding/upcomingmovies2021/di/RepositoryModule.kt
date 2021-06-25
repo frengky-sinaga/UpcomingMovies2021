@@ -1,14 +1,13 @@
 package com.dicoding.upcomingmovies2021.di
 
-import com.dicoding.upcomingmovies2021.data.source.remote.RemoteDataSourceImpl
-import com.dicoding.upcomingmovies2021.data.source.remote.network.TheMovieDbApiService
-import com.dicoding.upcomingmovies2021.data.repositories.FilmRepository
 import com.dicoding.upcomingmovies2021.data.repositories.MovieRepository
 import com.dicoding.upcomingmovies2021.data.repositories.TvShowRepository
 import com.dicoding.upcomingmovies2021.data.source.local.MovieLocalDataSource
 import com.dicoding.upcomingmovies2021.data.source.local.TvShowLocalDataSource
 import com.dicoding.upcomingmovies2021.data.source.local.room.MovieDao
 import com.dicoding.upcomingmovies2021.data.source.local.room.TvShowDao
+import com.dicoding.upcomingmovies2021.data.source.remote.RemoteDataSourceImpl
+import com.dicoding.upcomingmovies2021.data.source.remote.network.TheMovieDbApiService
 import com.dicoding.upcomingmovies2021.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
@@ -35,12 +34,6 @@ object RepositoryModule {
     @Provides
     fun providesTvShowLocalDataSource(tvShowDao: TvShowDao): TvShowLocalDataSource =
         TvShowLocalDataSource(tvShowDao)
-
-    @Singleton
-    @Provides
-    fun providesFilmRepository(
-        remoteDataSourceImpl: RemoteDataSourceImpl
-    ): FilmRepository = FilmRepository(remoteDataSourceImpl)
 
     @Singleton
     @Provides

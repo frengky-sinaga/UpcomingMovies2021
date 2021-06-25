@@ -2,15 +2,12 @@ package com.dicoding.upcomingmovies2021.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.DetailMovieResponse
-import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.DetailTvShowResponse
-import com.dicoding.upcomingmovies2021.data.repositories.FilmRepository
 import com.dicoding.upcomingmovies2021.data.repositories.MovieRepository
 import com.dicoding.upcomingmovies2021.data.repositories.TvShowRepository
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.DetailTvShowEntity
-import com.dicoding.upcomingmovies2021.vo.Resource
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
+import com.dicoding.upcomingmovies2021.vo.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

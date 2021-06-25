@@ -1,11 +1,11 @@
-package com.dicoding.upcomingmovies2021.ui.adapter
+package com.dicoding.upcomingmovies2021.ui.adapter.home
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.dicoding.upcomingmovies2021.ui.fragments.MovieFragment
-import com.dicoding.upcomingmovies2021.ui.fragments.TvShowFragment
+import com.dicoding.upcomingmovies2021.ui.fragments.home.MovieFragment
+import com.dicoding.upcomingmovies2021.ui.fragments.home.TvShowFragment
 
-class SectionPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class HomeSectionPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
         return 2
     }

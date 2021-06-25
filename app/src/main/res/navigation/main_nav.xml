@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.dicoding.upcomingmovies2021.ui.fragments.HomeFragment"
+        android:name="com.dicoding.upcomingmovies2021.ui.fragments.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.dicoding.upcomingmovies2021.ui.fragments.FavoritesFragment"
+        android:name="com.dicoding.upcomingmovies2021.ui.fragments.favorites.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action

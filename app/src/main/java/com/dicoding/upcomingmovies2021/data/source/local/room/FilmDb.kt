@@ -25,7 +25,6 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowG
 )
 @TypeConverters(Converters::class)
 abstract class FilmDb : RoomDatabase() {
-
     abstract fun movieDao(): MovieDao
     abstract fun tvShowDao(): TvShowDao
 }

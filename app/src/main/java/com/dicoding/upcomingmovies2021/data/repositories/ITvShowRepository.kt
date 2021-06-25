@@ -7,7 +7,6 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.relatio
 import com.dicoding.upcomingmovies2021.vo.Resource
 
 interface ITvShowRepository {
-
     fun getTvShowsOfGenre(tvShowGenreId: Int): LiveData<List<GenreWithTvShows>>
     fun getTvShows(): LiveData<Resource<List<TvShowEntity>>>
     fun getDetailTvShow(tvShowId: Int): LiveData<Resource<DetailTvShowEntity>>

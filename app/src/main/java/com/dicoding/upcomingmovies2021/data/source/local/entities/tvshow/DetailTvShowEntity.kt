@@ -2,7 +2,6 @@ package com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.dicoding.upcomingmovies2021.data.source.local.entities.CompanyEmbedded
@@ -36,9 +35,9 @@ data class DetailTvShowEntity(
     @ColumnInfo(name = "status")
     val status: String,
 
-    @ColumnInfo(name="genre")
+    @ColumnInfo(name = "genre")
     val genre: List<GenreEmbedded>,
 
-    @ColumnInfo(name="companies")
+    @ColumnInfo(name = "companies")
     val companies: List<CompanyEmbedded>
 )

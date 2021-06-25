@@ -8,7 +8,6 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.relation
 
 @Dao
 interface MovieDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovies(movieEntities: List<MovieEntity>)
 

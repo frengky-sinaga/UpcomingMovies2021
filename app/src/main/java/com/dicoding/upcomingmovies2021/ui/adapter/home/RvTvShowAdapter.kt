@@ -1,4 +1,4 @@
-package com.dicoding.upcomingmovies2021.ui.adapter
+package com.dicoding.upcomingmovies2021.ui.adapter.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,9 +9,8 @@ import coil.size.Scale
 import coil.transform.RoundedCornersTransformation
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowEntity
-import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvShowResult
 import com.dicoding.upcomingmovies2021.databinding.ItemsFilmBinding
-import com.dicoding.upcomingmovies2021.ui.fragments.HomeFragmentDirections
+import com.dicoding.upcomingmovies2021.ui.fragments.home.HomeFragmentDirections
 import com.dicoding.upcomingmovies2021.utils.Constants
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 

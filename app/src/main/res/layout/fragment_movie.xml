@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:id="@+id/fragment_movie"
-    tools:context=".ui.fragments.MovieFragment">
+    tools:context=".ui.fragments.home.MovieFragment">
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progress_movie"

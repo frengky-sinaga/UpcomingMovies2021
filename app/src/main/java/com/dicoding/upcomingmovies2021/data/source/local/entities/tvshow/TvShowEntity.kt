@@ -18,10 +18,10 @@ data class TvShowEntity(
     @ColumnInfo(name = "first_air_date")
     val firstAirDate: String,
 
-    @ColumnInfo(name ="name")
+    @ColumnInfo(name = "name")
     val name: String,
 
-    @ColumnInfo(name ="original_name")
+    @ColumnInfo(name = "original_name")
     val originalName: String,
 
     @ColumnInfo(name = "poster_path")
