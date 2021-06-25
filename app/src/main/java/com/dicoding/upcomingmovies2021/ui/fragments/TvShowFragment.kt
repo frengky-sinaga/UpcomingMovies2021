@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.upcomingmovies2021.R
-import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvShowResult
+import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowEntity
 import com.dicoding.upcomingmovies2021.databinding.FragmentTvShowBinding
 import com.dicoding.upcomingmovies2021.ui.adapter.RvTvShowAdapter
 import com.dicoding.upcomingmovies2021.ui.viewmodel.TvShowViewModel
@@ -29,13 +29,12 @@ class TvShowFragment : Fragment(R.layout.fragment_tv_show) {
     }
 
     private fun setupObservers() {
-        viewModel.tvShowResult.observe(viewLifecycleOwner, { resources ->
+        viewModel.getTvShows().observe(viewLifecycleOwner, { resources ->
             when (resources.status) {
                 Resource.Status.SUCCESS -> {
                     dismissLoading()
                     resources.data?.let {
-                        val dataTvShows = it.results.toMutableList()
-                        setupRv(dataTvShows)
+                        setupRv(it)
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -50,9 +49,9 @@ class TvShowFragment : Fragment(R.layout.fragment_tv_show) {
         })
     }
 
-    private fun setupRv(data: List<TvShowResult>) {
+    private fun setupRv(data: List<TvShowEntity>) {
         val tvShowAdapter = RvTvShowAdapter()
-        tvShowAdapter.setDetail(data)
+        tvShowAdapter.setTvShows(data)
         with(binding.rvTvShow) {
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)

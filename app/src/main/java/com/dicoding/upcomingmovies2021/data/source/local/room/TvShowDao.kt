@@ -19,7 +19,7 @@ interface TvShowDao {
     @Query("SELECT * FROM tv_show_genre_entity WHERE tv_show_genre_id = :tvShowGenreId")
     fun getTvShowsOfGenre(tvShowGenreId: Int): LiveData<List<GenreWithTvShows>>
 
-    @Query("SELECT * FROM movies_entity")
+    @Query("SELECT * FROM tv_show_entity")
     fun getTvShows(): LiveData<List<TvShowEntity>>
 
     @Query("SELECT * FROM detail_tv_show_entity WHERE detail_tv_show_id = :tvShowId")

@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModel
 import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.DetailMovieResponse
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.DetailTvShowResponse
 import com.dicoding.upcomingmovies2021.data.repositories.FilmRepository
+import com.dicoding.upcomingmovies2021.data.repositories.MovieRepository
+import com.dicoding.upcomingmovies2021.data.repositories.TvShowRepository
+import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
+import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.DetailTvShowEntity
 import com.dicoding.upcomingmovies2021.vo.Resource
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,11 +16,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val filmRepository: FilmRepository
+    private val movieRepository: MovieRepository,
+    private val tvShowRepository: TvShowRepository
 ) : ViewModel() {
 
-    var movieDetail: LiveData<Resource<DetailMovieResponse>>? = null
-    var tvShowDetail: LiveData<Resource<DetailTvShowResponse>>? = null
+    var movieDetail: LiveData<Resource<DetailMovieEntity>>? = null
+    var tvShowDetail: LiveData<Resource<DetailTvShowEntity>>? = null
 
     fun setData(typeFilm: TypeFilm, id: Int) {
         when (typeFilm) {
@@ -31,10 +36,10 @@ class DetailViewModel @Inject constructor(
     }
 
     private fun getDetailMovie(idMovie: Int) {
-        movieDetail = filmRepository.getDetailMovie(idMovie)
+        movieDetail = movieRepository.getDetailMovie(idMovie)
     }
 
     private fun getDetailTvShow(idTvShow: Int) {
-        tvShowDetail = filmRepository.getDetailTvShow(idTvShow)
+        tvShowDetail = tvShowRepository.getDetailTvShow(idTvShow)
     }
 }

@@ -33,9 +33,9 @@ data class DetailMovieEntity(
     @ColumnInfo(name = "status")
     val status: String,
 
-    @Embedded
+    @ColumnInfo(name="genre")
     val genre: List<GenreEmbedded>,
 
-    @Embedded
+    @ColumnInfo(name="companies")
     val companies: List<CompanyEmbedded>
 )

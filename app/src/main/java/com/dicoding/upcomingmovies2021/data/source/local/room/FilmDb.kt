@@ -2,6 +2,8 @@ package com.dicoding.upcomingmovies2021.data.source.local.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.dicoding.upcomingmovies2021.data.source.local.converters.Converters
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieGenreEntity
@@ -21,6 +23,7 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowG
     version = 1,
     exportSchema = false
 )
+@TypeConverters(Converters::class)
 abstract class FilmDb : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao

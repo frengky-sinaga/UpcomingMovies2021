@@ -48,11 +48,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     resources.data?.let { data ->
                         data.overview?.let { setupTv(data.originalTitle, data.releaseDate, it) }
                         data.backdropPath?.let { setupImg(it) }
-                        for (genre in data.genres) {
-                            createChip(genre.name, 0)
+                        for (genre in data.genre) {
+                            createChip(genre.genreName, 0)
                         }
-                        for (company in data.productionCompanies) {
-                            createChip(company.name, 1)
+                        for (company in data.companies) {
+                            createChip(company.companyName, 1)
                         }
                     }
                 }
@@ -76,11 +76,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     resources.data?.let { data ->
                         setupTv(data.originalName, data.firstAirDate, data.overview)
                         data.backdropPath?.let { setupImg(it) }
-                        for (genre in data.genres) {
-                            createChip(genre.name, 0)
+                        for (genre in data.genre) {
+                            createChip(genre.genreName, 0)
                         }
-                        for (company in data.productionCompanies) {
-                            createChip(company.name, 1)
+                        for (company in data.companies) {
+                            createChip(company.companyName, 1)
                         }
                     }
                 }
