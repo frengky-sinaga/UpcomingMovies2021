@@ -2,8 +2,11 @@ package com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.dicoding.upcomingmovies2021.data.source.local.entities.CompanyEmbedded
+import com.dicoding.upcomingmovies2021.data.source.local.entities.GenreEmbedded
 
 @Entity(tableName = "detail_tv_show_entity")
 data class DetailTvShowEntity(
@@ -11,9 +14,6 @@ data class DetailTvShowEntity(
     @NonNull
     @ColumnInfo(name = "detail_tv_show_id")
     val detailTvShowId: Int,
-
-    @ColumnInfo(name = "tv_show_id")
-    val tvShowId: Int,
 
     @ColumnInfo(name = "backdrop_path")
     val backdropPath: String?,
@@ -35,4 +35,10 @@ data class DetailTvShowEntity(
 
     @ColumnInfo(name = "status")
     val status: String,
+
+    @Embedded
+    val genre: List<GenreEmbedded>,
+
+    @Embedded
+    val companies: List<CompanyEmbedded>
 )

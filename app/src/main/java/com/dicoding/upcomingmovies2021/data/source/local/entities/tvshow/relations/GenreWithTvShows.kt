@@ -13,7 +13,6 @@ data class GenreWithTvShows(
     @Relation(
         parentColumn = "tv_show_genre_id",
         entityColumn = "tv_show_id",
-        associateBy = Junction(TvShowGenreCrossRef::class)
     )
     val tvShowEntity: List<TvShowEntity>
 )

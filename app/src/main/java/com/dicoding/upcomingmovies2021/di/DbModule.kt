@@ -3,6 +3,8 @@ package com.dicoding.upcomingmovies2021.di
 import android.content.Context
 import androidx.room.Room
 import com.dicoding.upcomingmovies2021.data.source.local.room.FilmDb
+import com.dicoding.upcomingmovies2021.data.source.local.room.MovieDao
+import com.dicoding.upcomingmovies2021.data.source.local.room.TvShowDao
 import com.dicoding.upcomingmovies2021.utils.Constants.DB_NAME
 import dagger.Module
 import dagger.Provides
@@ -23,9 +25,9 @@ object DbModule {
 
     @Singleton
     @Provides
-    fun provideMovieDao(database: FilmDb) = database.movieDao()
+    fun provideMovieDao(database: FilmDb): MovieDao = database.movieDao()
 
     @Singleton
     @Provides
-    fun provideTvShowDao(database: FilmDb) = database.tvShowDao()
+    fun provideTvShowDao(database: FilmDb): TvShowDao = database.tvShowDao()
 }
