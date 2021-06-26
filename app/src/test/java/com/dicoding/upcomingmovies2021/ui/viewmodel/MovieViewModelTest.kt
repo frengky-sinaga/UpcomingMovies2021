@@ -3,12 +3,13 @@ package com.dicoding.upcomingmovies2021.ui.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.dicoding.upcomingmovies2021.data.repositories.FilmRepository
-import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.UpcomingMoviesResponse
+import com.dicoding.upcomingmovies2021.data.repositories.MovieRepository
+import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
+import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieEntity
 import com.dicoding.upcomingmovies2021.utils.DummyData
-import com.dicoding.upcomingmovies2021.utils.LiveDataTestUtil.getValue
 import com.dicoding.upcomingmovies2021.vo.Resource
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -20,16 +21,18 @@ import org.mockito.kotlin.whenever
 
 @RunWith(MockitoJUnitRunner::class)
 class MovieViewModelTest {
-
-    private val dummyMovies = DummyData.generateMovies()
-    private val error = "error"
+    private val dummyMovies = DummyData.generateMovieEntities()
+    private val dummyFavoriteMovies = DummyData.generateDetailMovieEntities()
     private lateinit var viewModel: MovieViewModel
 
     @Mock
-    lateinit var repository: FilmRepository
+    lateinit var repository: MovieRepository
 
     @Mock
-    lateinit var observerMovie: Observer<Resource<UpcomingMoviesResponse>>
+    private lateinit var observerMovies: Observer<Resource<List<MovieEntity>>>
+
+    @Mock
+    private lateinit var observerDetailMovie: Observer<List<DetailMovieEntity>>
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -40,48 +43,34 @@ class MovieViewModelTest {
     }
 
     @Test
-    fun `test getMovieResult return success`() {
-        whenever(repository.getUpcomingMovies())
-            .thenReturn(MutableLiveData(Resource.success(dummyMovies)))
+    fun `test getMovies`() {
+        val fakeMovies = MutableLiveData<Resource<List<MovieEntity>>>()
+        fakeMovies.value = Resource.success(dummyMovies)
 
-        val resource = getValue(viewModel.movieResult)
-        verify(repository).getUpcomingMovies()
+        whenever(repository.getMovies()).thenReturn(fakeMovies)
 
-        viewModel.movieResult.observeForever(observerMovie)
-        verify(observerMovie).onChanged(Resource.success(dummyMovies))
+        val movieEntities = viewModel.getMovies().value?.data
+        verify(repository).getMovies()
+        assertNotNull(movieEntities)
+        assertEquals(dummyMovies.size, movieEntities?.size)
 
-        assertNotNull(resource.data)
-        assertTrue(resource.status == Resource.Status.SUCCESS)
-        assertEquals(dummyMovies, resource.data)
+        viewModel.getMovies().observeForever(observerMovies)
+        verify(observerMovies).onChanged(Resource.success(dummyMovies))
     }
 
     @Test
-    fun `test getMovieResult return error`() {
-        whenever(repository.getUpcomingMovies())
-            .thenReturn(MutableLiveData(Resource.error(error)))
+    fun `test getFavMovies`() {
+        val fakeFavoritesMovies = MutableLiveData<List<DetailMovieEntity>>()
+        fakeFavoritesMovies.value = dummyFavoriteMovies
 
-        val resource = getValue(viewModel.movieResult)
-        verify(repository).getUpcomingMovies()
+        whenever(repository.getFavoriteMovies()).thenReturn(fakeFavoritesMovies)
 
-        viewModel.movieResult.observeForever(observerMovie)
-        verify(observerMovie).onChanged(Resource.error(error))
+        val favoritesMovieEntities = viewModel.getFavMovies().value
+        verify(repository).getFavoriteMovies()
+        assertNotNull(favoritesMovieEntities)
+        assertEquals(dummyFavoriteMovies.size, favoritesMovieEntities?.size)
 
-        assertTrue(resource.status == Resource.Status.ERROR)
-        assertEquals(error, resource.message)
-    }
-
-    @Test
-    fun `test getMovieResult return empty`() {
-        whenever(repository.getUpcomingMovies())
-            .thenReturn(MutableLiveData(Resource.empty()))
-
-        val resource = getValue(viewModel.movieResult)
-        verify(repository).getUpcomingMovies()
-
-        viewModel.movieResult.observeForever(observerMovie)
-        verify(observerMovie).onChanged(Resource.empty())
-
-        assertTrue(resource.status == Resource.Status.EMPTY)
-        assertEquals(null, resource.data)
+        viewModel.getFavMovies().observeForever(observerDetailMovie)
+        verify(observerDetailMovie).onChanged(dummyFavoriteMovies)
     }
 }
