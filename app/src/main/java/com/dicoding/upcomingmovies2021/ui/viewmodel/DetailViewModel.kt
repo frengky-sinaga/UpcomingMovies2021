@@ -39,4 +39,22 @@ class DetailViewModel @Inject constructor(
     private fun getDetailTvShow(idTvShow: Int) {
         tvShowDetail = tvShowRepository.getDetailTvShow(idTvShow)
     }
+
+    fun setMovieFavorite() {
+        val movie = movieDetail?.value
+        if (movie?.data == null) return
+        else {
+            val newState = !movie.data.favorite
+            movieRepository.setFavMovie(movie.data, newState)
+        }
+    }
+
+    fun setTvShowFavorite() {
+        val tvShow = tvShowDetail?.value
+        if (tvShow?.data == null) return
+        else {
+            val newState = !tvShow.data.favorite
+            tvShowRepository.setFavTvShow(tvShow.data, newState)
+        }
+    }
 }

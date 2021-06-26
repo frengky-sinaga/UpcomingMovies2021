@@ -10,4 +10,7 @@ interface IMovieRepository {
     fun getMoviesOfGenre(movieGenreId: Int): LiveData<List<GenreWithMovies>>
     fun getMovies(): LiveData<Resource<List<MovieEntity>>>
     fun getDetailMovie(movieId: Int): LiveData<Resource<DetailMovieEntity>>
+    fun getFavoriteMovies(): LiveData<List<DetailMovieEntity>>
+    fun setFavMovie(detailMovieEntity: DetailMovieEntity, newFavState: Boolean)
+    fun deleteAllFavMovies()
 }

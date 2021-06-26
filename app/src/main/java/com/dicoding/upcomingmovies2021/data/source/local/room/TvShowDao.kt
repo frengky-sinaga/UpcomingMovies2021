@@ -23,4 +23,13 @@ interface TvShowDao {
 
     @Query("SELECT * FROM detail_tv_show_entity WHERE detail_tv_show_id = :tvShowId")
     fun getDetailTvShow(tvShowId: Int): LiveData<DetailTvShowEntity>
+
+    @Query("SELECT * FROM detail_tv_show_entity WHERE favorite = 1")
+    fun getFavoriteTvShows(): LiveData<List<DetailTvShowEntity>>
+
+    @Update
+    fun setFavTvShow(detailTvShowEntity: DetailTvShowEntity)
+
+    @Query("DELETE FROM detail_tv_show_entity WHERE favorite = 1")
+    fun deleteAllFavTvShows()
 }

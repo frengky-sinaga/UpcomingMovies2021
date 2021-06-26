@@ -96,4 +96,19 @@ class TvShowRepository @Inject constructor(
             }
         }.asLiveData()
     }
+
+    override fun getFavoriteTvShows(): LiveData<List<DetailTvShowEntity>> =
+        tvShowLocalDataSource.getFavoriteTvShows()
+
+    override fun setFavTvShow(detailTvShowEntity: DetailTvShowEntity, newFavState: Boolean) {
+        appExecutors.diskIO().execute {
+            tvShowLocalDataSource.setFavTvShow(detailTvShowEntity, newFavState)
+        }
+    }
+
+    override fun deleteAllFavTvShows() {
+        appExecutors.diskIO().execute {
+            tvShowLocalDataSource.deleteAllFavTvShows()
+        }
+    }
 }

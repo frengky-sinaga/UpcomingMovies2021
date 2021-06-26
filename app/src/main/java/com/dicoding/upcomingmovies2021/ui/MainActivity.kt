@@ -1,11 +1,11 @@
 package com.dicoding.upcomingmovies2021.ui
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -16,8 +16,7 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener,
-    Toolbar.OnMenuItemClickListener {
+class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener{
 
     private lateinit var binding: ActivityMainBinding
 
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setSupportActionBar(binding.bottomAppBar)
         setController()
         setBottomAppBar()
     }
@@ -41,7 +40,6 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     private fun setBottomAppBar() {
         binding.bottomAppBar.apply {
-            setOnMenuItemClickListener(this@MainActivity)
             setNavigationOnClickListener {
                 val drawerFragment = DrawerFragment()
                 drawerFragment.show(supportFragmentManager, drawerFragment.tag)
@@ -54,49 +52,59 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        when (destination.id) {
-            R.id.homeFragment -> destinationHome()
-            R.id.favoritesFragment -> destinationHome()
-            R.id.detailFragment -> destinationDetail()
-        }
-    }
-
-    private fun destinationDetail() {
         binding.apply {
-            bottomAppBar.apply {
-                fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                performHide()
-                visibility = View.GONE
+            when(destination.id){
+                R.id.homeFragment ->{
+                    bottomAppBar.apply {
+                        replaceMenu(R.menu.menu_appbar)
+                        fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                        visibility = View.VISIBLE
+                        performShow()
+                    }
+                    fab.setImageDrawable(
+                        AppCompatResources.getDrawable(
+                            this@MainActivity,
+                            R.drawable.ic_movie_filter
+                        )
+                    )
+                }
+                R.id.favoritesFragment -> {
+                    bottomAppBar.apply {
+                        replaceMenu(R.menu.menu_appbar_favorite)
+                        fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                        visibility = View.VISIBLE
+                        performShow()
+                    }
+                    fab.setImageDrawable(
+                        AppCompatResources.getDrawable(
+                            this@MainActivity,
+                            R.drawable.ic_movie_filter
+                        )
+                    )
+                }
+                R.id.detailFragment -> {
+                    bottomAppBar.apply {
+                        fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                        performHide()
+                        visibility = View.GONE
+                    }
+                }
             }
-            fab.setImageDrawable(
-                AppCompatResources.getDrawable(
-                    this@MainActivity,
-                    R.drawable.ic_favorite_border
-                )
-            )
         }
     }
 
-    private fun destinationHome() {
-        binding.apply {
-            bottomAppBar.apply {
-                fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                visibility = View.VISIBLE
-                performShow()
-            }
-            fab.setImageDrawable(
-                AppCompatResources.getDrawable(
-                    this@MainActivity,
-                    R.drawable.ic_movie_filter
-                )
-            )
-        }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_appbar, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onMenuItemClick(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.menu_exit -> finish()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.menu_exit -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-        return true
     }
 }

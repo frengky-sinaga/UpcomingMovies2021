@@ -11,4 +11,7 @@ interface IMovieLocalDataSource {
     fun getMoviesOfGenre(movieGenreId: Int): LiveData<List<GenreWithMovies>>
     fun getMovies(): LiveData<List<MovieEntity>>
     fun getDetailMovie(movieId: Int): LiveData<DetailMovieEntity>
+    fun getFavoriteMovies(): LiveData<List<DetailMovieEntity>>
+    fun setFavMovie(detailMovieEntity: DetailMovieEntity, newFavState: Boolean)
+    fun deleteAllFavMovies()
 }

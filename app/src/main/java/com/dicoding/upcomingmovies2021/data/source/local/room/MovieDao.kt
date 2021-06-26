@@ -23,4 +23,13 @@ interface MovieDao {
 
     @Query("SELECT * FROM detail_movie_entity WHERE detail_movie_id = :movieId")
     fun getDetailMovie(movieId: Int): LiveData<DetailMovieEntity>
+
+    @Query("SELECT * FROM detail_movie_entity WHERE favorite = 1")
+    fun getFavoriteMovies(): LiveData<List<DetailMovieEntity>>
+
+    @Update
+    fun setFavMovie(detailMovieEntity: DetailMovieEntity)
+
+    @Query("DELETE FROM detail_movie_entity WHERE favorite = 1")
+    fun deleteAllFavMovies()
 }

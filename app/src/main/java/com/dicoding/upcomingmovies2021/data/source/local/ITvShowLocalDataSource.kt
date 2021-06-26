@@ -11,4 +11,7 @@ interface ITvShowLocalDataSource {
     fun getTvShowsOfGenre(tvShowGenreId: Int): LiveData<List<GenreWithTvShows>>
     fun getTvShows(): LiveData<List<TvShowEntity>>
     fun getDetailTvShow(tvShowId: Int): LiveData<DetailTvShowEntity>
+    fun getFavoriteTvShows(): LiveData<List<DetailTvShowEntity>>
+    fun setFavTvShow(detailTvShowEntity: DetailTvShowEntity, newFavState: Boolean)
+    fun deleteAllFavTvShows()
 }

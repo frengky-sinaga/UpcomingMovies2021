@@ -96,4 +96,19 @@ class MovieRepository @Inject constructor(
             }
         }.asLiveData()
     }
+
+    override fun getFavoriteMovies(): LiveData<List<DetailMovieEntity>> =
+        movieLocalDataSource.getFavoriteMovies()
+
+    override fun setFavMovie(detailMovieEntity: DetailMovieEntity, newFavState: Boolean) {
+        appExecutors.diskIO().execute {
+            movieLocalDataSource.setFavMovie(detailMovieEntity, newFavState)
+        }
+    }
+
+    override fun deleteAllFavMovies() {
+        appExecutors.diskIO().execute {
+            movieLocalDataSource.deleteAllFavMovies()
+        }
+    }
 }

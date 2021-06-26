@@ -22,4 +22,14 @@ class TvShowLocalDataSource @Inject constructor(private val tvShowDao: TvShowDao
 
     override fun getDetailTvShow(tvShowId: Int): LiveData<DetailTvShowEntity> =
         tvShowDao.getDetailTvShow(tvShowId)
+
+    override fun getFavoriteTvShows(): LiveData<List<DetailTvShowEntity>> =
+        tvShowDao.getFavoriteTvShows()
+
+    override fun setFavTvShow(detailTvShowEntity: DetailTvShowEntity, newFavState: Boolean) {
+        detailTvShowEntity.favorite = newFavState
+        tvShowDao.setFavTvShow(detailTvShowEntity)
+    }
+
+    override fun deleteAllFavTvShows() = tvShowDao.deleteAllFavTvShows()
 }

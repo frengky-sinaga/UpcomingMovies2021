@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -16,6 +17,7 @@ import com.dicoding.upcomingmovies2021.utils.Constants.API_BACKDROP_PATH
 import com.dicoding.upcomingmovies2021.vo.Resource
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import com.google.android.material.chip.Chip
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +26,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     private val viewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
     private lateinit var binding: FragmentDetailBinding
+    private var fab: FloatingActionButton? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,6 +45,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private fun setupDetailMovieObservers() {
         viewModel.movieDetail?.observe(viewLifecycleOwner, { resources ->
+            var fabStatus = false
             when (resources.status) {
                 Resource.Status.SUCCESS -> {
                     dismissLoading()
@@ -54,6 +58,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         for (company in data.companies) {
                             createChip(company.companyName, 1)
                         }
+                        fabStatus = data.favorite
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -65,11 +70,13 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 Resource.Status.LOADING -> showLoading()
                 Resource.Status.EMPTY -> dismissLoading()
             }
+            fabListener(TypeFilm.Movie, fabStatus)
         })
     }
 
     private fun setupDetailTvShowObservers() {
         viewModel.tvShowDetail?.observe(viewLifecycleOwner, { resources ->
+            var fabStatus = false
             when (resources.status) {
                 Resource.Status.SUCCESS -> {
                     dismissLoading()
@@ -82,6 +89,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                         for (company in data.companies) {
                             createChip(company.companyName, 1)
                         }
+                        fabStatus = data.favorite
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -93,6 +101,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 Resource.Status.LOADING -> showLoading()
                 Resource.Status.EMPTY -> dismissLoading()
             }
+            fabListener(TypeFilm.TvShow, fabStatus)
         })
     }
 
@@ -137,8 +146,14 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             isCloseIconVisible = false
             isClickable = false
             isCheckable = false
-            if (type == 0) binding.chipGenreDetailFilm.addView(chip)
-            else if (type == 1) binding.chipProductionCompanyDetailFilm.addView(chip)
+            if (type == 0) {
+                binding.chipGenreDetailFilm.removeAllViews()
+                binding.chipGenreDetailFilm.addView(chip)
+            }
+            else if (type == 1) {
+                binding.chipProductionCompanyDetailFilm.removeAllViews()
+                binding.chipProductionCompanyDetailFilm.addView(chip)
+            }
         }
     }
 
@@ -156,5 +171,39 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     private fun showToast(text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun fabListener(typeFilm: TypeFilm, status: Boolean) {
+        fab = activity?.findViewById(R.id.fab)
+        fab?.apply {
+            setImgFab(status)
+            setOnClickListener {
+                if (typeFilm == TypeFilm.Movie) viewModel.setMovieFavorite()
+                else viewModel.setTvShowFavorite()
+            }
+        }
+    }
+
+    private fun setImgFab(status: Boolean) {
+        fab?.apply {
+            setImageDrawable(
+                if (status) {
+                    AppCompatResources.getDrawable(
+                        context,
+                        R.drawable.ic_favorite
+                    )
+                } else {
+                    AppCompatResources.getDrawable(
+                        context,
+                        R.drawable.ic_favorite_border
+                    )
+                }
+            )
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        fab = null
     }
 }

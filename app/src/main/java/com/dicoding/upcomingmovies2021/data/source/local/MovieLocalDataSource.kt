@@ -22,4 +22,14 @@ class MovieLocalDataSource @Inject constructor(private val movieDao: MovieDao) :
 
     override fun getDetailMovie(movieId: Int): LiveData<DetailMovieEntity> =
         movieDao.getDetailMovie(movieId)
+
+    override fun getFavoriteMovies(): LiveData<List<DetailMovieEntity>> =
+        movieDao.getFavoriteMovies()
+
+    override fun setFavMovie(detailMovieEntity: DetailMovieEntity, newFavState: Boolean) {
+        detailMovieEntity.favorite = newFavState
+        movieDao.setFavMovie(detailMovieEntity)
+    }
+
+    override fun deleteAllFavMovies() = movieDao.deleteAllFavMovies()
 }

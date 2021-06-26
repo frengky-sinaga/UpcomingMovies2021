@@ -39,5 +39,8 @@ data class DetailTvShowEntity(
     val genre: List<GenreEmbedded>,
 
     @ColumnInfo(name = "companies")
-    val companies: List<CompanyEmbedded>
+    val companies: List<CompanyEmbedded>,
+
+    @ColumnInfo(name = "favorite")
+    var favorite: Boolean = false
 )
