@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowEntity
@@ -79,9 +80,9 @@ class TvShowFragment : Fragment() {
         })
     }
 
-    private fun setupRv(data: List<TvShowEntity>) {
+    private fun setupRv(data: PagedList<TvShowEntity>) {
         val tvShowAdapter = RvTvShowAdapter()
-        tvShowAdapter.setTvShows(data)
+        tvShowAdapter.submitList(data)
         with(binding.rvTvShow) {
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)

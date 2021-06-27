@@ -3,10 +3,10 @@ package com.dicoding.upcomingmovies2021.ui.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.dicoding.upcomingmovies2021.data.repositories.MovieRepository
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieEntity
-import com.dicoding.upcomingmovies2021.utils.DummyData
 import com.dicoding.upcomingmovies2021.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -21,18 +21,22 @@ import org.mockito.kotlin.whenever
 
 @RunWith(MockitoJUnitRunner::class)
 class MovieViewModelTest {
-    private val dummyMovies = DummyData.generateMovieEntities()
-    private val dummyFavoriteMovies = DummyData.generateDetailMovieEntities()
     private lateinit var viewModel: MovieViewModel
 
     @Mock
     lateinit var repository: MovieRepository
 
     @Mock
-    private lateinit var observerMovies: Observer<Resource<List<MovieEntity>>>
+    private lateinit var observerMovies: Observer<Resource<PagedList<MovieEntity>>>
 
     @Mock
-    private lateinit var observerDetailMovie: Observer<List<DetailMovieEntity>>
+    private lateinit var observerDetailMovie: Observer<PagedList<DetailMovieEntity>>
+
+    @Mock
+    private lateinit var pagedListMovie: PagedList<MovieEntity>
+
+    @Mock
+    private lateinit var pagedListFavMovie: PagedList<DetailMovieEntity>
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -44,33 +48,39 @@ class MovieViewModelTest {
 
     @Test
     fun `test getMovies`() {
-        val fakeMovies = MutableLiveData<Resource<List<MovieEntity>>>()
-        fakeMovies.value = Resource.success(dummyMovies)
+        val dummyData = Resource.success(pagedListMovie)
+        whenever(dummyData.data?.size).thenReturn(5)
+
+        val fakeMovies = MutableLiveData<Resource<PagedList<MovieEntity>>>()
+        fakeMovies.value = dummyData
 
         whenever(repository.getMovies()).thenReturn(fakeMovies)
 
         val movieEntities = viewModel.getMovies().value?.data
         verify(repository).getMovies()
         assertNotNull(movieEntities)
-        assertEquals(dummyMovies.size, movieEntities?.size)
+        assertEquals(5, movieEntities?.size)
 
         viewModel.getMovies().observeForever(observerMovies)
-        verify(observerMovies).onChanged(Resource.success(dummyMovies))
+        verify(observerMovies).onChanged(dummyData)
     }
 
     @Test
     fun `test getFavMovies`() {
-        val fakeFavoritesMovies = MutableLiveData<List<DetailMovieEntity>>()
-        fakeFavoritesMovies.value = dummyFavoriteMovies
+        val dummyData = pagedListFavMovie
+        whenever(dummyData.size).thenReturn(5)
+
+        val fakeFavoritesMovies = MutableLiveData<PagedList<DetailMovieEntity>>()
+        fakeFavoritesMovies.value = dummyData
 
         whenever(repository.getFavoriteMovies()).thenReturn(fakeFavoritesMovies)
 
         val favoritesMovieEntities = viewModel.getFavMovies().value
         verify(repository).getFavoriteMovies()
         assertNotNull(favoritesMovieEntities)
-        assertEquals(dummyFavoriteMovies.size, favoritesMovieEntities?.size)
+        assertEquals(5, favoritesMovieEntities?.size)
 
         viewModel.getFavMovies().observeForever(observerDetailMovie)
-        verify(observerDetailMovie).onChanged(dummyFavoriteMovies)
+        verify(observerDetailMovie).onChanged(dummyData)
     }
 }

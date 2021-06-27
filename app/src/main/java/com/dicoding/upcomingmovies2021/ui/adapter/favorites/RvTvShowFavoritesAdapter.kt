@@ -3,6 +3,8 @@ package com.dicoding.upcomingmovies2021.ui.adapter.favorites
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
@@ -14,14 +16,25 @@ import com.dicoding.upcomingmovies2021.ui.fragments.favorites.FavoritesFragmentD
 import com.dicoding.upcomingmovies2021.utils.Constants
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 
-class RvTvShowFavoritesAdapter : RecyclerView.Adapter<RvTvShowFavoritesAdapter.ViewHolder>() {
+class RvTvShowFavoritesAdapter :
+    PagedListAdapter<DetailTvShowEntity, RvTvShowFavoritesAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    private var listTvShows = ArrayList<DetailTvShowEntity>()
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DetailTvShowEntity>() {
+            override fun areItemsTheSame(
+                oldItem: DetailTvShowEntity,
+                newItem: DetailTvShowEntity
+            ): Boolean {
+                return oldItem.detailTvShowId == newItem.detailTvShowId
+            }
 
-    fun setTvShows(tvShows: List<DetailTvShowEntity>?) {
-        if (tvShows.isNullOrEmpty()) return
-        this.listTvShows.clear()
-        this.listTvShows.addAll(tvShows)
+            override fun areContentsTheSame(
+                oldItem: DetailTvShowEntity,
+                newItem: DetailTvShowEntity
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,10 +43,9 @@ class RvTvShowFavoritesAdapter : RecyclerView.Adapter<RvTvShowFavoritesAdapter.V
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listTvShows[position])
+        val tvShowFavorite = getItem(position)
+        if (tvShowFavorite != null) holder.bind(tvShowFavorite)
     }
-
-    override fun getItemCount(): Int = listTvShows.size
 
     inner class ViewHolder(private val binding: ItemsFilmBinding) :
         RecyclerView.ViewHolder(binding.root) {

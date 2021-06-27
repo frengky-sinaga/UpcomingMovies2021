@@ -3,6 +3,8 @@ package com.dicoding.upcomingmovies2021.ui.adapter.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
@@ -14,14 +16,18 @@ import com.dicoding.upcomingmovies2021.ui.fragments.home.HomeFragmentDirections
 import com.dicoding.upcomingmovies2021.utils.Constants
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 
-class RvMovieAdapter : RecyclerView.Adapter<RvMovieAdapter.ViewHolder>() {
+class RvMovieAdapter : PagedListAdapter<MovieEntity, RvMovieAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    private var listMovies = ArrayList<MovieEntity>()
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieEntity>() {
+            override fun areItemsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+                return oldItem.movieId == newItem.movieId
+            }
 
-    fun setMovies(movies: List<MovieEntity>?) {
-        if (movies.isNullOrEmpty()) return
-        this.listMovies.clear()
-        this.listMovies.addAll(movies)
+            override fun areContentsTheSame(oldItem: MovieEntity, newItem: MovieEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,10 +36,9 @@ class RvMovieAdapter : RecyclerView.Adapter<RvMovieAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listMovies[position])
+        val movie = getItem(position)
+        if (movie != null) holder.bind(movie)
     }
-
-    override fun getItemCount(): Int = listMovies.size
 
     inner class ViewHolder(private val binding: ItemsFilmBinding) :
         RecyclerView.ViewHolder(binding.root) {

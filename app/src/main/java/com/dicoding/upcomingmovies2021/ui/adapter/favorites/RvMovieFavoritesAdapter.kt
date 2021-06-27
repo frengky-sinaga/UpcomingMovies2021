@@ -3,25 +3,39 @@ package com.dicoding.upcomingmovies2021.ui.adapter.favorites
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
 import coil.transform.RoundedCornersTransformation
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
+import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieEntity
 import com.dicoding.upcomingmovies2021.databinding.ItemsFilmBinding
 import com.dicoding.upcomingmovies2021.ui.fragments.favorites.FavoritesFragmentDirections
 import com.dicoding.upcomingmovies2021.utils.Constants
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 
-class RvMovieFavoritesAdapter : RecyclerView.Adapter<RvMovieFavoritesAdapter.ViewHolder>() {
+class RvMovieFavoritesAdapter :
+    PagedListAdapter<DetailMovieEntity, RvMovieFavoritesAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    private var listMovies = ArrayList<DetailMovieEntity>()
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DetailMovieEntity>() {
+            override fun areItemsTheSame(
+                oldItem: DetailMovieEntity,
+                newItem: DetailMovieEntity
+            ): Boolean {
+                return oldItem.detailMovieId == newItem.detailMovieId
+            }
 
-    fun setMovies(movies: List<DetailMovieEntity>?) {
-        if (movies.isNullOrEmpty()) return
-        this.listMovies.clear()
-        this.listMovies.addAll(movies)
+            override fun areContentsTheSame(
+                oldItem: DetailMovieEntity,
+                newItem: DetailMovieEntity
+            ): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,10 +44,9 @@ class RvMovieFavoritesAdapter : RecyclerView.Adapter<RvMovieFavoritesAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listMovies[position])
+        val movieFavorite = getItem(position)
+        if (movieFavorite != null) holder.bind(movieFavorite)
     }
-
-    override fun getItemCount(): Int = listMovies.size
 
     inner class ViewHolder(private val binding: ItemsFilmBinding) :
         RecyclerView.ViewHolder(binding.root) {

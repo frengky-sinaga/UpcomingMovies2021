@@ -1,6 +1,7 @@
 package com.dicoding.upcomingmovies2021.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieEntity
@@ -14,13 +15,13 @@ interface MovieDao {
     fun insertDetailMovie(detailMovieEntity: DetailMovieEntity)
 
     @Query("SELECT * FROM movies_entity")
-    fun getMovies(): LiveData<List<MovieEntity>>
+    fun getMovies(): DataSource.Factory<Int, MovieEntity>
 
     @Query("SELECT * FROM detail_movie_entity WHERE detail_movie_id = :movieId")
     fun getDetailMovie(movieId: Int): LiveData<DetailMovieEntity>
 
     @Query("SELECT * FROM detail_movie_entity WHERE favorite = 1")
-    fun getFavoriteMovies(): LiveData<List<DetailMovieEntity>>
+    fun getFavoriteMovies(): DataSource.Factory<Int, DetailMovieEntity>
 
     @Update
     fun setFavMovie(detailMovieEntity: DetailMovieEntity)

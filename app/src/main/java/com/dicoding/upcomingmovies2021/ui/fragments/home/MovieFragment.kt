@@ -5,6 +5,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieEntity
@@ -79,9 +80,9 @@ class MovieFragment : Fragment() {
         })
     }
 
-    private fun setupRv(data: List<MovieEntity>) {
+    private fun setupRv(data: PagedList<MovieEntity>) {
         val movieAdapter = RvMovieAdapter()
-        movieAdapter.setMovies(data)
+        movieAdapter.submitList(data)
         with(binding.rvFilm) {
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)

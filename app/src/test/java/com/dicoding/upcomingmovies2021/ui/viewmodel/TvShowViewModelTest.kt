@@ -3,10 +3,10 @@ package com.dicoding.upcomingmovies2021.ui.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import com.dicoding.upcomingmovies2021.data.repositories.TvShowRepository
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.DetailTvShowEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowEntity
-import com.dicoding.upcomingmovies2021.utils.DummyData
 import com.dicoding.upcomingmovies2021.vo.Resource
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -22,8 +22,6 @@ import org.mockito.kotlin.whenever
 @RunWith(MockitoJUnitRunner::class)
 class TvShowViewModelTest {
 
-    private val dummyTvShows = DummyData.generateTvShowEntities()
-    private val dummyFavoriteTvShows = DummyData.generateDetailTvEntities()
     private lateinit var viewModel: TvShowViewModel
 
     @Mock
@@ -38,6 +36,12 @@ class TvShowViewModelTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    @Mock
+    private lateinit var pagedListTvShows: PagedList<TvShowEntity>
+
+    @Mock
+    private lateinit var pagedListFavTvShows: PagedList<DetailTvShowEntity>
+
     @Before
     fun setUp() {
         viewModel = TvShowViewModel(repository)
@@ -45,33 +49,39 @@ class TvShowViewModelTest {
 
     @Test
     fun `test getTvShows`() {
-        val fakeMovies = MutableLiveData<Resource<List<TvShowEntity>>>()
-        fakeMovies.value = Resource.success(dummyTvShows)
+        val dummyData = Resource.success(pagedListTvShows)
+        whenever(dummyData.data?.size).thenReturn(5)
+
+        val fakeMovies = MutableLiveData<Resource<PagedList<TvShowEntity>>>()
+        fakeMovies.value = dummyData
 
         whenever(repository.getTvShows()).thenReturn(fakeMovies)
 
         val tvShowEntities = viewModel.getTvShows().value?.data
         verify(repository).getTvShows()
         assertNotNull(tvShowEntities)
-        assertEquals(dummyTvShows.size, tvShowEntities?.size)
+        assertEquals(5, tvShowEntities?.size)
 
         viewModel.getTvShows().observeForever(observerTvShows)
-        verify(observerTvShows).onChanged(Resource.success(dummyTvShows))
+        verify(observerTvShows).onChanged(dummyData)
     }
 
     @Test
     fun `test getFavTvShows`() {
-        val fakeFavoritesTvShows = MutableLiveData<List<DetailTvShowEntity>>()
-        fakeFavoritesTvShows.value = dummyFavoriteTvShows
+        val dummyData = pagedListFavTvShows
+        whenever(dummyData.size).thenReturn(5)
+
+        val fakeFavoritesTvShows = MutableLiveData<PagedList<DetailTvShowEntity>>()
+        fakeFavoritesTvShows.value = dummyData
 
         whenever(repository.getFavoriteTvShows()).thenReturn(fakeFavoritesTvShows)
 
         val favoritesMovieEntities = viewModel.getFavTvShows().value
         verify(repository).getFavoriteTvShows()
         assertNotNull(favoritesMovieEntities)
-        assertEquals(dummyFavoriteTvShows.size, favoritesMovieEntities?.size)
+        assertEquals(5, favoritesMovieEntities?.size)
 
         viewModel.getFavTvShows().observeForever(observerDetailTvShow)
-        verify(observerDetailTvShow).onChanged(dummyFavoriteTvShows)
+        verify(observerDetailTvShow).onChanged(dummyData)
     }
 }

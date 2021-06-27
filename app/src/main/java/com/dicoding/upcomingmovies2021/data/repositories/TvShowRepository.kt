@@ -1,6 +1,8 @@
 package com.dicoding.upcomingmovies2021.data.repositories
 
 import androidx.lifecycle.LiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.dicoding.upcomingmovies2021.data.NetworkBoundResource
 import com.dicoding.upcomingmovies2021.data.source.local.TvShowLocalDataSource
 import com.dicoding.upcomingmovies2021.data.source.local.entities.CompanyEmbedded
@@ -20,12 +22,19 @@ class TvShowRepository @Inject constructor(
     private val remoteDataSourceImpl: RemoteDataSourceImpl,
     private val appExecutors: AppExecutors
 ) : ITvShowRepository {
-    override fun getTvShows(): LiveData<Resource<List<TvShowEntity>>> {
-        return object : NetworkBoundResource<List<TvShowEntity>, TvOnTheAirResponse>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<TvShowEntity>> =
-                tvShowLocalDataSource.getTvShows()
+    override fun getTvShows(): LiveData<Resource<PagedList<TvShowEntity>>> {
+        return object :
+            NetworkBoundResource<PagedList<TvShowEntity>, TvOnTheAirResponse>(appExecutors) {
+            override fun loadFromDB(): LiveData<PagedList<TvShowEntity>> {
+                val config = PagedList.Config.Builder()
+                    .setEnablePlaceholders(false)
+                    .setInitialLoadSizeHint(6)
+                    .setPageSize(6)
+                    .build()
+                return LivePagedListBuilder(tvShowLocalDataSource.getTvShows(), config).build()
+            }
 
-            override fun shouldFetch(data: List<TvShowEntity>?): Boolean = data.isNullOrEmpty()
+            override fun shouldFetch(data: PagedList<TvShowEntity>?): Boolean = data.isNullOrEmpty()
 
             override fun createCall(): LiveData<ApiResponse<TvOnTheAirResponse>> =
                 remoteDataSourceImpl.getTvOnTheAir()
@@ -93,8 +102,14 @@ class TvShowRepository @Inject constructor(
         }.asLiveData()
     }
 
-    override fun getFavoriteTvShows(): LiveData<List<DetailTvShowEntity>> =
-        tvShowLocalDataSource.getFavoriteTvShows()
+    override fun getFavoriteTvShows(): LiveData<PagedList<DetailTvShowEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(6)
+            .setPageSize(6)
+            .build()
+        return LivePagedListBuilder(tvShowLocalDataSource.getFavoriteTvShows(), config).build()
+    }
 
     override fun setFavTvShow(detailTvShowEntity: DetailTvShowEntity, newFavState: Boolean) {
         appExecutors.diskIO().execute {

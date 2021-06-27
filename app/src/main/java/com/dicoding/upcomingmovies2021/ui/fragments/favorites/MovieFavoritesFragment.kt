@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
@@ -35,9 +36,9 @@ class MovieFavoritesFragment : Fragment(R.layout.fragment_movie_favorites) {
         })
     }
 
-    private fun setupRv(data: List<DetailMovieEntity>) {
+    private fun setupRv(data: PagedList<DetailMovieEntity>) {
         val movieAdapter = RvMovieFavoritesAdapter()
-        movieAdapter.setMovies(data)
+        movieAdapter.submitList(data)
         with(binding.rvMovieFavorites) {
             layoutManager = GridLayoutManager(context, 2)
             setHasFixedSize(true)

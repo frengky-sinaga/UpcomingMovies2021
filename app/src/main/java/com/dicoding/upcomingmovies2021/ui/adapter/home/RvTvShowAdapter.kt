@@ -3,6 +3,8 @@ package com.dicoding.upcomingmovies2021.ui.adapter.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
@@ -14,14 +16,18 @@ import com.dicoding.upcomingmovies2021.ui.fragments.home.HomeFragmentDirections
 import com.dicoding.upcomingmovies2021.utils.Constants
 import com.dicoding.upcomingmovies2021.utils.TypeFilm
 
-class RvTvShowAdapter : RecyclerView.Adapter<RvTvShowAdapter.ViewHolder>() {
+class RvTvShowAdapter : PagedListAdapter<TvShowEntity ,RvTvShowAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-    private var listTvShows = ArrayList<TvShowEntity>()
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvShowEntity>() {
+            override fun areItemsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem.tvShowId == newItem.tvShowId
+            }
 
-    fun setTvShows(tvShows: List<TvShowEntity>?) {
-        if (tvShows.isNullOrEmpty()) return
-        this.listTvShows.clear()
-        this.listTvShows.addAll(tvShows)
+            override fun areContentsTheSame(oldItem: TvShowEntity, newItem: TvShowEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,10 +36,9 @@ class RvTvShowAdapter : RecyclerView.Adapter<RvTvShowAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listTvShows[position])
+        val tvShow = getItem(position)
+        if (tvShow != null) holder.bind(tvShow)
     }
-
-    override fun getItemCount(): Int = listTvShows.size
 
     inner class ViewHolder(private val binding: ItemsFilmBinding) :
         RecyclerView.ViewHolder(binding.root) {

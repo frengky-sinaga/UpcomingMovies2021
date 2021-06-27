@@ -2,6 +2,7 @@ package com.dicoding.upcomingmovies2021.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagedList
 import com.dicoding.upcomingmovies2021.data.repositories.MovieRepository
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieEntity
@@ -13,9 +14,9 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
-    fun getMovies(): LiveData<Resource<List<MovieEntity>>> = movieRepository.getMovies()
+    fun getMovies(): LiveData<Resource<PagedList<MovieEntity>>> = movieRepository.getMovies()
 
-    fun getFavMovies(): LiveData<List<DetailMovieEntity>> = movieRepository.getFavoriteMovies()
+    fun getFavMovies(): LiveData<PagedList<DetailMovieEntity>> = movieRepository.getFavoriteMovies()
 
     fun deleteAllFavorites() = movieRepository.deleteAllFavMovies()
 

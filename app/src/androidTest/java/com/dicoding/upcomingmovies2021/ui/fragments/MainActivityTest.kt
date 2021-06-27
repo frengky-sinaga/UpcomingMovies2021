@@ -10,8 +10,10 @@ import androidx.test.espresso.action.Press
 import androidx.test.espresso.action.Swipe
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.contrib.DrawerActions
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.dicoding.upcomingmovies2021.R
@@ -44,7 +46,7 @@ class MainActivityTest {
         onView(withId(R.id.rv_film)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_film)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
-                10
+                3
             )
         )
         onView(withId(R.id.rv_film)).perform(
@@ -60,13 +62,19 @@ class MainActivityTest {
         onView(withId(R.id.rv_tv_show)).check(matches(isDisplayed()))
         onView(withId(R.id.rv_tv_show)).perform(
             RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
-                10
+                3
             )
         )
     }
 
     @Test
     fun viewDetailMovie() {
+        onView(withId(R.id.rv_film)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_film)).perform(
+            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+                3
+            )
+        )
         onView(withId(R.id.rv_film)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
@@ -100,6 +108,12 @@ class MainActivityTest {
         onView(withId(R.id.toolbar_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.chip_genre_detailFilm)).check(matches(isDisplayed()))
         onView(withId(R.id.chip_production_company_detailFilm)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun loadFavMovies() {
+        onView(withId(R.id.bottomAppBar)).check(matches(isDisplayed()))
+        onView(withId(R.id.bottomAppBar)).perform(click())
     }
 
     private fun swipeLeft(): ViewAction {
