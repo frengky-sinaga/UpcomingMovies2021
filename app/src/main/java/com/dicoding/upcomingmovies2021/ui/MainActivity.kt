@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
 
     private fun setBottomAppBar() {
         binding.bottomAppBar.apply {
+            navigationContentDescription = "Navigation Drawer"
             setNavigationOnClickListener {
                 val drawerFragment = DrawerFragment()
                 drawerFragment.show(supportFragmentManager, drawerFragment.tag)

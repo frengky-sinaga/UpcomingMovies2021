@@ -11,9 +11,9 @@ import androidx.test.espresso.action.Swipe
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.DrawerActions
+import androidx.test.espresso.contrib.NavigationViewActions
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.dicoding.upcomingmovies2021.R
@@ -76,6 +76,11 @@ class MainActivityTest {
             )
         )
         onView(withId(R.id.rv_film)).perform(
+            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+                0
+            )
+        )
+        onView(withId(R.id.rv_film)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
                 click()
@@ -95,6 +100,16 @@ class MainActivityTest {
     fun viewDetailTvShow() {
         onView(withId(R.id.viewPager)).perform(swipeLeft())
         onView(withId(R.id.rv_tv_show)).perform(
+            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+                3
+            )
+        )
+        onView(withId(R.id.rv_tv_show)).perform(
+            RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
+                0
+            )
+        )
+        onView(withId(R.id.rv_tv_show)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 0,
                 click()
@@ -113,7 +128,20 @@ class MainActivityTest {
     @Test
     fun loadFavMovies() {
         onView(withId(R.id.bottomAppBar)).check(matches(isDisplayed()))
-        onView(withId(R.id.bottomAppBar)).perform(click())
+        onView(withContentDescription("Navigation Drawer")).perform(click())
+        onView(withId(R.id.nav_view_fragment_drawer)).perform(NavigationViewActions.navigateTo(R.id.menu_favorites))
+        onView(withId(R.id.rv_movie_favorites)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun loadFavTvShows() {
+        onView(withId(R.id.bottomAppBar)).check(matches(isDisplayed()))
+        onView(withContentDescription("Navigation Drawer")).perform(click())
+        onView(withId(R.id.nav_view_fragment_drawer)).perform(NavigationViewActions.navigateTo(R.id.menu_favorites))
+        onView(withId(R.id.rv_movie_favorites)).check(matches(isDisplayed()))
+        onView(withId(R.id.viewPager_favorite)).check(matches(isDisplayed()))
+        onView(withId(R.id.viewPager_favorite)).perform(swipeLeft())
+        onView(withId(R.id.rv_tv_show_favorites)).check(matches(isDisplayed()))
     }
 
     private fun swipeLeft(): ViewAction {
