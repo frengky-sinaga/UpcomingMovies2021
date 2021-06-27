@@ -7,7 +7,6 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.CompanyEmbedde
 import com.dicoding.upcomingmovies2021.data.source.local.entities.GenreEmbedded
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.DetailTvShowEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowEntity
-import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.relations.GenreWithTvShows
 import com.dicoding.upcomingmovies2021.data.source.remote.RemoteDataSourceImpl
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.DetailTvShowResponse
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.TvOnTheAirResponse
@@ -21,9 +20,6 @@ class TvShowRepository @Inject constructor(
     private val remoteDataSourceImpl: RemoteDataSourceImpl,
     private val appExecutors: AppExecutors
 ) : ITvShowRepository {
-    override fun getTvShowsOfGenre(tvShowGenreId: Int): LiveData<List<GenreWithTvShows>> =
-        tvShowLocalDataSource.getTvShowsOfGenre(tvShowGenreId)
-
     override fun getTvShows(): LiveData<Resource<List<TvShowEntity>>> {
         return object : NetworkBoundResource<List<TvShowEntity>, TvOnTheAirResponse>(appExecutors) {
             override fun loadFromDB(): LiveData<List<TvShowEntity>> =

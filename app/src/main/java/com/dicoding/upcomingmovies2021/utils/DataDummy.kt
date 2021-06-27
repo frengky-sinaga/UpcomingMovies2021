@@ -4,12 +4,8 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.CompanyEmbedde
 import com.dicoding.upcomingmovies2021.data.source.local.entities.GenreEmbedded
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieEntity
-import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieGenreEntity
-import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.relations.GenreWithMovies
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.DetailTvShowEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowEntity
-import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowGenreEntity
-import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.relations.GenreWithTvShows
 import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.*
 import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.ProductionCompany
 import com.dicoding.upcomingmovies2021.data.source.remote.models.tvshow.*
@@ -133,28 +129,6 @@ object DummyData {
                     )
                 ),
                 status = "Returning Series",
-            )
-        )
-    }
-
-    fun generateMoviesByGenre(): List<GenreWithMovies> {
-        return listOf(
-            GenreWithMovies(
-                MovieGenreEntity(
-                    movieGenreId = 27,
-                ),
-                generateMovieEntities()
-            )
-        )
-    }
-
-    fun generateTvShowsByGenre(): List<GenreWithTvShows> {
-        return listOf(
-            GenreWithTvShows(
-                TvShowGenreEntity(
-                    tvShowGenreId = 18,
-                ),
-                generateTvShowEntities()
             )
         )
     }

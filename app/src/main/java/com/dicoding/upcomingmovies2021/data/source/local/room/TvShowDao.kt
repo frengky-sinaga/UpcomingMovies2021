@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.DetailTvShowEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowEntity
-import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.relations.GenreWithTvShows
 
 @Dao
 interface TvShowDao {
@@ -13,10 +12,6 @@ interface TvShowDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertDetailTvShow(detailTvShowEntity: DetailTvShowEntity)
-
-    @Transaction
-    @Query("SELECT * FROM tv_show_genre_entity WHERE tv_show_genre_id = :tvShowGenreId")
-    fun getTvShowsOfGenre(tvShowGenreId: Int): LiveData<List<GenreWithTvShows>>
 
     @Query("SELECT * FROM tv_show_entity")
     fun getTvShows(): LiveData<List<TvShowEntity>>

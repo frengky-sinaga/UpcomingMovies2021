@@ -1,7 +1,7 @@
 package com.dicoding.upcomingmovies2021.ui.fragments.home
 
 import android.os.Bundle
-import android.view.View
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -10,22 +10,52 @@ import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowEntity
 import com.dicoding.upcomingmovies2021.databinding.FragmentTvShowBinding
 import com.dicoding.upcomingmovies2021.ui.adapter.home.RvTvShowAdapter
+import com.dicoding.upcomingmovies2021.ui.fragments.SortDialogFragment
 import com.dicoding.upcomingmovies2021.ui.viewmodel.TvShowViewModel
+import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import com.dicoding.upcomingmovies2021.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TvShowFragment : Fragment(R.layout.fragment_tv_show) {
+class TvShowFragment : Fragment() {
+
+    private var _binding: FragmentTvShowBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: TvShowViewModel by viewModels()
-    private lateinit var binding: FragmentTvShowBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentTvShowBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentTvShowBinding.bind(view)
-
+        setHasOptionsMenu(true)
         setupObservers()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_film, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_exit -> {
+                activity?.finish()
+                true
+            }
+            R.id.menu_open_sort_dialog -> {
+                setupSortDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun setupObservers() {
@@ -73,5 +103,15 @@ class TvShowFragment : Fragment(R.layout.fragment_tv_show) {
 
     private fun showToast(text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun setupSortDialog() {
+        val sortDialogFragment = SortDialogFragment.newInstance(TypeFilm.TvShow)
+        sortDialogFragment.show(childFragmentManager, SortDialogFragment.TAG)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

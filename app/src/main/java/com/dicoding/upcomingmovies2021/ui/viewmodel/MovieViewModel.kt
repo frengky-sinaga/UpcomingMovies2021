@@ -13,10 +13,13 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
-
     fun getMovies(): LiveData<Resource<List<MovieEntity>>> = movieRepository.getMovies()
 
     fun getFavMovies(): LiveData<List<DetailMovieEntity>> = movieRepository.getFavoriteMovies()
 
     fun deleteAllFavorites() = movieRepository.deleteAllFavMovies()
+
+    fun sortMovies(sort: String){
+
+    }
 }

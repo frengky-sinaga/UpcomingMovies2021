@@ -114,6 +114,10 @@ dependencies {
     def room = "2.3.0"
     implementation "androidx.room:room-runtime:$room"
     kapt "androidx.room:room-compiler:$room"
+
+    def pagingVersion = "2.1.1"
+    //noinspection GradleDependency
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 }
 
 kapt {

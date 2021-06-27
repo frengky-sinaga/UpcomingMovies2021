@@ -13,7 +13,6 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.DetailT
 import com.dicoding.upcomingmovies2021.databinding.FragmentTvShowFavoritesBinding
 import com.dicoding.upcomingmovies2021.ui.adapter.favorites.RvTvShowFavoritesAdapter
 import com.dicoding.upcomingmovies2021.ui.viewmodel.TvShowViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,24 +20,13 @@ class TvShowFavoritesFragment : Fragment(R.layout.fragment_tv_show_favorites) {
 
     private lateinit var binding: FragmentTvShowFavoritesBinding
     private val viewModel: TvShowViewModel by viewModels()
-    private var fab: FloatingActionButton? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentTvShowFavoritesBinding.bind(view)
         setHasOptionsMenu(true)
-        fabListener()
         setupObservers()
-    }
-
-    private fun fabListener() {
-        fab = activity?.findViewById(R.id.fab)
-        fab?.apply {
-            setOnClickListener {
-
-            }
-        }
     }
 
     private fun setupObservers() {
@@ -73,10 +61,5 @@ class TvShowFavoritesFragment : Fragment(R.layout.fragment_tv_show_favorites) {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        fab = null
     }
 }

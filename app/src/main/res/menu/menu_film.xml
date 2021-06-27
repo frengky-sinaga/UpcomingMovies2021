@@ -2,7 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_open_sort_dialog"
+        android:icon="@drawable/ic_movie_filter"
+        android:title="@string/sort"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/menu_exit"
         android:title="@string/exit"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 </menu>

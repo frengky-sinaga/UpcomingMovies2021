@@ -13,7 +13,6 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMo
 import com.dicoding.upcomingmovies2021.databinding.FragmentMovieFavoritesBinding
 import com.dicoding.upcomingmovies2021.ui.adapter.favorites.RvMovieFavoritesAdapter
 import com.dicoding.upcomingmovies2021.ui.viewmodel.MovieViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,24 +20,13 @@ class MovieFavoritesFragment : Fragment(R.layout.fragment_movie_favorites) {
 
     private lateinit var binding: FragmentMovieFavoritesBinding
     private val viewModel: MovieViewModel by viewModels()
-    private var fab: FloatingActionButton? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentMovieFavoritesBinding.bind(view)
         setHasOptionsMenu(true)
-        fabListener()
         setupObservers()
-    }
-
-    private fun fabListener() {
-        fab = activity?.findViewById(R.id.fab)
-        fab?.apply {
-            setOnClickListener {
-
-            }
-        }
     }
 
     private fun setupObservers() {
@@ -73,10 +61,5 @@ class MovieFavoritesFragment : Fragment(R.layout.fragment_movie_favorites) {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        fab = null
     }
 }

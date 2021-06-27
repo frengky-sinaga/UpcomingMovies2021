@@ -185,4 +185,15 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_right_detailFilm"
         app:layout_constraintStart_toStartOf="@id/guideline_left_detailFilm"
         app:layout_constraintTop_toBottomOf="@id/description_detailFilm" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_movie_filter"
+        app:fabSize="normal"
+        tools:ignore="ContentDescription"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="36dp"/>
 </androidx.constraintlayout.motion.widget.MotionLayout>

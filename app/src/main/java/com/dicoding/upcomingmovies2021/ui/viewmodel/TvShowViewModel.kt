@@ -19,4 +19,8 @@ class TvShowViewModel @Inject constructor(
     fun getFavTvShows(): LiveData<List<DetailTvShowEntity>> = tvShowRepository.getFavoriteTvShows()
 
     fun deleteAllFavorites() = tvShowRepository.deleteAllFavTvShows()
+
+    fun sortTvShows(sort: String){
+
+    }
 }

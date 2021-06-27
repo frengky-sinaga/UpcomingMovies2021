@@ -174,8 +174,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun fabListener(typeFilm: TypeFilm, status: Boolean) {
-        fab = activity?.findViewById(R.id.fab)
-        fab?.apply {
+        binding.fabDetail.apply {
             setImgFab(status)
             setOnClickListener {
                 if (typeFilm == TypeFilm.Movie) viewModel.setMovieFavorite()
@@ -185,7 +184,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun setImgFab(status: Boolean) {
-        fab?.apply {
+        binding.fabDetail.apply {
             setImageDrawable(
                 if (status) {
                     AppCompatResources.getDrawable(

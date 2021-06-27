@@ -7,7 +7,6 @@ import com.dicoding.upcomingmovies2021.data.source.local.entities.CompanyEmbedde
 import com.dicoding.upcomingmovies2021.data.source.local.entities.GenreEmbedded
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.DetailMovieEntity
 import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.MovieEntity
-import com.dicoding.upcomingmovies2021.data.source.local.entities.movie.relations.GenreWithMovies
 import com.dicoding.upcomingmovies2021.data.source.remote.RemoteDataSourceImpl
 import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.DetailMovieResponse
 import com.dicoding.upcomingmovies2021.data.source.remote.models.movie.UpcomingMoviesResponse
@@ -21,9 +20,6 @@ class MovieRepository @Inject constructor(
     private val remoteDataSourceImpl: RemoteDataSourceImpl,
     private val appExecutors: AppExecutors
 ) : IMovieRepository {
-    override fun getMoviesOfGenre(movieGenreId: Int): LiveData<List<GenreWithMovies>> =
-        movieLocalDataSource.getMoviesOfGenre(movieGenreId)
-
     override fun getMovies(): LiveData<Resource<List<MovieEntity>>> {
         return object :
             NetworkBoundResource<List<MovieEntity>, UpcomingMoviesResponse>(appExecutors) {
