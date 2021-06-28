@@ -8,8 +8,6 @@ This app implements:
 - Retrofit
 - Hilt
 - SafeArgs
-
-## Next Features
 - Room Database
 - Paging
 
@@ -17,4 +15,4 @@ This app implements:
 You need to add API_KEY of [TheMovieDB](themoviedb.org) to gradle.properties
 
 ## Status
-On-progress
+Complete Submission 3
