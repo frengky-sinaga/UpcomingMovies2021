@@ -11,9 +11,7 @@ import com.dicoding.upcomingmovies2021.R
 import com.dicoding.upcomingmovies2021.data.source.local.entities.tvshow.TvShowEntity
 import com.dicoding.upcomingmovies2021.databinding.FragmentTvShowBinding
 import com.dicoding.upcomingmovies2021.ui.adapter.home.RvTvShowAdapter
-import com.dicoding.upcomingmovies2021.ui.fragments.SortDialogFragment
 import com.dicoding.upcomingmovies2021.ui.viewmodel.TvShowViewModel
-import com.dicoding.upcomingmovies2021.utils.TypeFilm
 import com.dicoding.upcomingmovies2021.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,10 +47,6 @@ class TvShowFragment : Fragment() {
         return when (item.itemId) {
             R.id.menu_exit -> {
                 activity?.finish()
-                true
-            }
-            R.id.menu_open_sort_dialog -> {
-                setupSortDialog()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -104,11 +98,6 @@ class TvShowFragment : Fragment() {
 
     private fun showToast(text: String) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun setupSortDialog() {
-        val sortDialogFragment = SortDialogFragment.newInstance(TypeFilm.TvShow)
-        sortDialogFragment.show(childFragmentManager, SortDialogFragment.TAG)
     }
 
     override fun onDestroyView() {

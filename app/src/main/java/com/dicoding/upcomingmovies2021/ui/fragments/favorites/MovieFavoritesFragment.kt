@@ -47,7 +47,7 @@ class MovieFavoritesFragment : Fragment(R.layout.fragment_movie_favorites) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_appbar_favorite, menu)
+        inflater.inflate(R.menu.menu_fav_movie, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -56,7 +56,7 @@ class MovieFavoritesFragment : Fragment(R.layout.fragment_movie_favorites) {
                 activity?.finish()
                 true
             }
-            R.id.menu_delete -> {
+            R.id.menu_delete_movie -> {
                 viewModel.deleteAllFavorites()
                 true
             }

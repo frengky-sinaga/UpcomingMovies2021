@@ -16,11 +16,5 @@
     <string name="home">Home</string>
     <string name="favorites">Favorites</string>
     <string name="delete">delete</string>
-    <string name="sort_movies_by">Sort Movies by:</string>
-    <string name="yes">yes</string>
-    <string name="cancel">cancel</string>
-    <string name="name">Name</string>
-    <string name="release_date">Release Date</string>
-    <string name="sort">Sort</string>
 
 </resources>

@@ -20,7 +20,4 @@ class MovieViewModel @Inject constructor(
 
     fun deleteAllFavorites() = movieRepository.deleteAllFavMovies()
 
-    fun sortMovies(sort: String){
-
-    }
 }

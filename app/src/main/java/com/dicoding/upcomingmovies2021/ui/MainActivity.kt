@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 }
                 R.id.favoritesFragment -> {
                     bottomAppBar.apply {
-                        replaceMenu(R.menu.menu_appbar_favorite)
+                        replaceMenu(R.menu.menu_film)
                         visibility = View.VISIBLE
                         performShow()
                     }

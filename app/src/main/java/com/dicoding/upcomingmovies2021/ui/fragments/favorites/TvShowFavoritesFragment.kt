@@ -47,7 +47,7 @@ class TvShowFavoritesFragment : Fragment(R.layout.fragment_tv_show_favorites) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_appbar_favorite, menu)
+        inflater.inflate(R.menu.menu_fav_tv_show, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -56,7 +56,7 @@ class TvShowFavoritesFragment : Fragment(R.layout.fragment_tv_show_favorites) {
                 activity?.finish()
                 true
             }
-            R.id.menu_delete -> {
+            R.id.menu_delete_tv_show -> {
                 viewModel.deleteAllFavorites()
                 true
             }

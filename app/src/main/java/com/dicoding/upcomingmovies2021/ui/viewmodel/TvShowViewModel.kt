@@ -21,7 +21,4 @@ class TvShowViewModel @Inject constructor(
 
     fun deleteAllFavorites() = tvShowRepository.deleteAllFavTvShows()
 
-    fun sortTvShows(sort: String){
-
-    }
 }
